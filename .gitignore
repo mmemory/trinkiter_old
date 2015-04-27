@@ -1,9 +1,7 @@
 .idea
 .DS_Store
 node_modules/
-config.rb
 package.json
 Gruntfile.js
 .sass-cache
-Gemfile
 Gemfile.lock
