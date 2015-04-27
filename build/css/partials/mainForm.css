@@ -5,12 +5,12 @@
   opacity: .95;
 }
 
-/* line 8, ../../../src/styles/partials/mainForm.scss */
+/* line 8, ../../../src/styles/partials/_mainForm.scss */
 .form-main--form {
   text-align: center;
   margin-top: 50px;
 }
-/* line 12, ../../../src/styles/partials/mainForm.scss */
+/* line 12, ../../../src/styles/partials/_mainForm.scss */
 .form-main--form .form-main--input {
   margin: 10px;
 }

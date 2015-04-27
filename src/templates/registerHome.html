@@ -1,16 +1,26 @@
 <section class="wrapper-main--transparent">
-	<form class="form-main--form">
+	<form class="form-main--form" name="registerForm"
+			ng-submit="register()">
 
-		<input class="form-main--input form-main--email" type="firstname" name="firstname" placeholder="First Name"
-				ng-model="firstname"/> <br/>
-		<input class="form-main--input form-main--email" type="lastname" name="lastname" placeholder="Last Name"
-				ng-model="lastname"/> <br/>
-		<input class="form-main--input form-main--email" type="email" placeholder="email"
-				ng-model="email"/> <br/>
-		<input class="form-main--input form-main--pass" type="password" placeholder="password"
-				ng-model="password"/> <br/>
+		<p ng-show="message">{{message}}</p>
 
-		<button class="form-main--input form-main--button" type="submit"
-				ng-click="registerUser()">Submit</button>
+		<input class="form-main--input form-main--email" type="firstname" name="firstname" placeholder="first name"
+				ng-model="user.firstname" ng-required="true"/> <br/>
+		<p ng-show="registerForm.firstname.$invalid && registerForm.firstname.$touched">Please enter a first name</p>
+
+		<input class="form-main--input form-main--email" type="lastname" name="lastname" placeholder="fast name"
+				ng-model="user.lastname" ng-required="true"/> <br/>
+		<p ng-show="registerForm.lastname.$invalid && registerForm.lastname.$touched">Please enter a last name</p>
+
+		<input class="form-main--input form-main--email" type="email" name="email" placeholder="email"
+				ng-model="user.email" ng-required="true"/> <br/>
+		<p ng-show="registerForm.email.$invalid && registerForm.email.$touched">Please enter a valid email address</p>
+
+		<input class="form-main--input form-main--pass" type="password" name="password" placeholder="password"
+				ng-model="user.password" ng-required="true"/> <br/>
+		<p ng-show="registerForm.password.$invalid && registerForm.password.$touched">Please choose a password</p>
+
+		<button class="form-main--input form-main--button" type="submit" ng-disabled="registerForm.$invalid">Register</button>
+		<p>or <a href="#/">login</a></p>
 	</form>
 </section>

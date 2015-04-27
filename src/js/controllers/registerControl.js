@@ -1,7 +1,27 @@
-app.controller('registerControl', function($scope, $firebaseArray, MainService) {
+var app = angular.module('trinkApp');
 
-    $scope.registerUser = function() {
-        return MainService.registerUser($scope.firstname, $scope.lastname, $scope.email, $scope.password);
+app.controller('registerControl', function($scope, MainService, fb, $firebaseAuth, $firebaseObject, $location) {
+
+    $scope.user = {};
+
+
+
+    $scope.register = function() {
+        MainService.registerUser($scope.user.email, $scope.user.password)
+            .then(function(authData) {
+                var ref = new Firebase(fb.url + '/users/' + authData.uid);
+                var firebaseUser = $firebaseObject(ref);
+                firebaseUser.userInfo = {
+                    date: Firebase.ServerValue.TIMESTAMP,
+                    firstname: $scope.user.firstname,
+                    lastname: $scope.user.lastname,
+                    email: $scope.user.email
+                };
+                firebaseUser.$save();
+                $location.path('/login');
+            })
+            .catch(function(error) {
+                $scope.message = error.message;
+            });
     }
-
 });

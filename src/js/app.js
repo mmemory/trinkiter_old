@@ -1,12 +1,12 @@
 var app = angular.module('trinkApp', ['ngRoute', 'firebase']);
 
-app.constant('base', {
+app.constant('fb', {
     url: 'https://trinkiter.firebaseio.com/'
 });
 
 app.config(function($routeProvider) {
     $routeProvider
-        .when('/', {
+        .when('/login', {
             templateUrl: 'src/templates/loginHome.html',
             controller: 'loginControl'
         })
@@ -14,11 +14,15 @@ app.config(function($routeProvider) {
             templateUrl: 'src/templates/registerHome.html',
             controller: 'registerControl'
         })
-        .when('/dashboard/:user', {
+        .when('/dashboard', {
             templateUrl: 'src/templates/dashboard',
             controller: 'dashControl'
         })
+        .when('/passwordreset', {
+            templateUrl: 'src/templates/lostPassword.html',
+            controller: 'resetPassControl'
+        })
         .otherwise({
-            redirectTo: '/'
+            redirectTo: '/login'
         })
 });
