@@ -1,4 +1,4 @@
-var app = angular.module('trinkApp', ['ngRoute']);
+var app = angular.module('trinkApp', ['ngRoute', 'firebase']);
 
 app.constant('base', {
     url: 'https://trinkiter.firebaseio.com/'
@@ -16,7 +16,7 @@ app.config(function($routeProvider) {
         })
         .when('/dashboard/:user', {
             templateUrl: 'src/templates/dashboard',
-            controller: 'dashController'
+            controller: 'dashControl'
         })
         .otherwise({
             redirectTo: '/'
@@ -30,6 +30,25 @@ app.controller('loginControl', function($scope) {
 
 
 });
+app.controller('registerControl', function($scope, $firebaseArray, MainService) {
+
+    $scope.registerUser = function() {
+        return MainService.registerUser($scope.firstname, $scope.lastname, $scope.email, $scope.password);
+    }
+
+});
 app.service('MainService', function(base) {
+
+
+    this.registerUser = function(firstname, lastname, email, password) {
+        var user = {
+            firstname: firstname,
+            lastname: lastname,
+            email: email,
+            pass: password
+        };
+
+        console.log(user);
+    }
 
 });

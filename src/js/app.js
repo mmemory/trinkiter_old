@@ -1,4 +1,4 @@
-var app = angular.module('trinkApp', ['ngRoute']);
+var app = angular.module('trinkApp', ['ngRoute', 'firebase']);
 
 app.constant('base', {
     url: 'https://trinkiter.firebaseio.com/'
@@ -16,7 +16,7 @@ app.config(function($routeProvider) {
         })
         .when('/dashboard/:user', {
             templateUrl: 'src/templates/dashboard',
-            controller: 'dashController'
+            controller: 'dashControl'
         })
         .otherwise({
             redirectTo: '/'
