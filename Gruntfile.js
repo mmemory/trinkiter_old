@@ -7,10 +7,9 @@ module.exports = function(grunt) {
     grunt.initConfig({
         concat: {
             options: {
-                separator: ';'
             },
             dist: {
-                src: ['src/js/**/*.js'],
+                src: ['src/js/app.js' ,'src/js/**/*.js'],
                 dest: 'build/js/scripts.js'
             }
         },
@@ -25,16 +24,16 @@ module.exports = function(grunt) {
             options: {
                 livereload: true
             },
+            js: {
+                files: ['src/js/app.js','src/js/**/*.js'],
+                tasks: ['concat']
+            },
             scss: {
                 files: ['src/styles/styles.scss', 'src/styles/partials/*.scss'],
                 tasks: ['compass:dev']
             },
-            js: {
-                files: 'src/js/**/*.js',
-                tasks: ['concat']
-            },
             html: {
-                files: ['*.html']
+                files: ['*.html', 'src/templates/*.html']
             }
         }
     });

@@ -22,14 +22,3 @@ app.config(function($routeProvider) {
             redirectTo: '/'
         })
 });
-app.controller('MainController', function($scope) {
-
-});
-app.controller('loginControl', function($scope) {
-
-
-
-});
-app.service('MainService', function(base) {
-
-});

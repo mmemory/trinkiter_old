@@ -4,6 +4,10 @@
 @import "breakpoint";
 @import "singularitygs";
 
+// Global Styles
+@import "partials/global";
+
 // Partial Imports
 @import "partials/header";
 @import "partials/footer";
+@import "partials/mainForm";
