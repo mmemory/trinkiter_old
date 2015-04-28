@@ -18,11 +18,13 @@ app.config(function($routeProvider) {
             templateUrl: 'src/templates/dashboard',
             controller: 'dashControl'
         })
-        .when('/passwordreset', {
+        .
+        when('/passwordreset', {
             templateUrl: 'src/templates/lostPassword.html',
             controller: 'resetPassControl'
         })
         .otherwise({
             redirectTo: '/login'
         })
-});
+})
+;
