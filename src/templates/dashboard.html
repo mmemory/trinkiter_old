@@ -1,4 +1,16 @@
 <section class="wrapper-dashboard">
-	<h1>Welcome to your dashboard</h1>
-	<p>To the <a href="#/login">login</a> screen</p>
+	<a href="#/login">Logout</a>
+	<button class="form-main--input form-main--button"
+			ng-click="getBlock()">Get Blocks</button>
+
+	<section class="test-blocks">
+		<div class="block"
+				ng-repeat="block in blocks">
+			<img ng-src="{{block.imgsrc}}" alt="{{block.title}}" width="300px"/>
+			<h3>{{block.title}}</h3>
+			<p>{{block.description}}</p>
+		</div>
+
+	</section>
 </section>
+

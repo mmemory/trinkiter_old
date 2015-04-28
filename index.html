@@ -6,15 +6,18 @@
 		<link rel="stylesheet" href="build/css/styles.css"/>
 	</head>
 	<body>
-		<section class="test-blocks">
-			<div class="block red"></div>
-			<div class="block blue"></div>
-			<div class="block green"></div>
-			<div class="block yellow"></div>
-		</section>
+		<!--<section class="test-blocks">-->
+			<!--<div class="block red"></div>-->
+			<!--<div class="block blue"></div>-->
+			<!--<div class="block green"></div>-->
+			<!--<div class="block yellow"></div>-->
+		<!--</section>-->
 
 		<!-- Begin Static Header -->
-		<header class="header-main"></header><!-- End Static Header -->
+		<header class="header-main" ng-controller="headerControl">
+
+			<p ng-if="$root.user">Conditional Content</p>
+		</header><!-- End Static Header -->
 
 		<!-- Begin Template Wrapper -->
 		<section class="page wrapper-main--view {{pageClass}}" ng-view></section>
@@ -39,6 +42,7 @@
 		<script src="src/js/controllers/registerControl.js"></script>
 		<script src="src/js/controllers/dashControl.js"></script>
 		<script src="src/js/controllers/resetPassControl.js"></script>
+		<script src="src/js/controllers/headerControl.js"></script>
 
 		<!--Live Reload-->
 		<script src="//localhost:35729/livereload.js"></script>
