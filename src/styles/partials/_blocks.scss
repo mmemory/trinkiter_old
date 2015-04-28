@@ -1,0 +1,35 @@
+@include add-grid(8);
+@include add-gutter(0);
+
+.test-blocks {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  z-index: -999;
+  //margin-top: 75px;
+  top: 0;
+  left: 0;
+
+  .block {
+    height: 100%;
+
+
+    @include float-span(2);
+  }
+
+  .red {
+    background: url("https://unsplash.imgix.net/photo-1429371527702-1bfdc0eeea7d?dpr=2&fit=crop&fm=jpg&h=650&q=75&w=950") no-repeat;
+  }
+
+  .blue {
+    background: url("https://ununsplash.imgix.net/photo-1429105049372-8d928fd29ba1?dpr=2&fit=crop&fm=jpg&h=650&q=75&w=950") no-repeat;
+  }
+
+  .green {
+    background: url("https://ununsplash.imgix.net/photo-1422433555807-2559a27433bd?dpr=2&fit=crop&fm=jpg&h=650&q=75&w=950") no-repeat;
+  }
+
+  .yellow {
+    background: url("https://unsplash.imgix.net/photo-1420819453217-57b6badd9e19?dpr=2&fit=crop&fm=jpg&h=625&q=75&w=950") no-repeat;
+  }
+}

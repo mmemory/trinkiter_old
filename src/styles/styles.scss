@@ -5,9 +5,13 @@
 @import "singularitygs";
 
 // Global Styles
+@import url(http://fonts.googleapis.com/css?family=Raleway:100,400,300,200);
+@import "partials/variables";
 @import "partials/global";
 
 // Partial Imports
+@import "partials/blocks";
+@import "partials/heroSection";
 @import "partials/header";
-@import "partials/footer";
 @import "partials/mainForm";
+@import "partials/animations";

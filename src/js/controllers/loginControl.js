@@ -2,6 +2,8 @@ var app = angular.module('trinkApp');
 
 app.controller('loginControl', function($scope, MainService) {
 
+    $scope.pageClass = 'page-login';
+
     // Login
     $scope.login = function() {
 
@@ -11,6 +13,4 @@ app.controller('loginControl', function($scope, MainService) {
                 $scope.newPass = 'Forgot your password?'
             });
     }
-
-
 });

@@ -1,0 +1,62 @@
+/*
+Syntax error: Undefined mixin 'add-grid'.
+        on line 1 of /Users/Admin/Sites/Trinkiter/Trinkiter/src/styles/partials/blocks.scss, in `add-grid'
+        from line 1 of /Users/Admin/Sites/Trinkiter/Trinkiter/src/styles/partials/blocks.scss
+
+1: @include add-grid(8);
+2: @include add-gutter(0);
+3: 
+4: .test-blocks {
+5:   width: 100%;
+6:   height: 100%;
+
+Backtrace:
+/Users/Admin/Sites/Trinkiter/Trinkiter/src/styles/partials/blocks.scss:1:in `add-grid'
+/Users/Admin/Sites/Trinkiter/Trinkiter/src/styles/partials/blocks.scss:1
+/Users/Admin/.rvm/gems/ruby-2.2.1/gems/sass-3.3.13/lib/sass/tree/visitors/perform.rb:320:in `block in visit_mixin'
+/Users/Admin/.rvm/gems/ruby-2.2.1/gems/sass-3.3.13/lib/sass/stack.rb:98:in `block in with_mixin'
+/Users/Admin/.rvm/gems/ruby-2.2.1/gems/sass-3.3.13/lib/sass/stack.rb:121:in `with_frame'
+/Users/Admin/.rvm/gems/ruby-2.2.1/gems/sass-3.3.13/lib/sass/stack.rb:98:in `with_mixin'
+/Users/Admin/.rvm/gems/ruby-2.2.1/gems/sass-3.3.13/lib/sass/tree/visitors/perform.rb:318:in `visit_mixin'
+/Users/Admin/.rvm/gems/ruby-2.2.1/gems/sass-3.3.13/lib/sass/tree/visitors/base.rb:36:in `visit'
+/Users/Admin/.rvm/gems/ruby-2.2.1/gems/sass-3.3.13/lib/sass/tree/visitors/perform.rb:152:in `block in visit'
+/Users/Admin/.rvm/gems/ruby-2.2.1/gems/sass-3.3.13/lib/sass/stack.rb:79:in `block in with_base'
+/Users/Admin/.rvm/gems/ruby-2.2.1/gems/sass-3.3.13/lib/sass/stack.rb:121:in `with_frame'
+/Users/Admin/.rvm/gems/ruby-2.2.1/gems/sass-3.3.13/lib/sass/stack.rb:79:in `with_base'
+/Users/Admin/.rvm/gems/ruby-2.2.1/gems/sass-3.3.13/lib/sass/tree/visitors/perform.rb:152:in `visit'
+/Users/Admin/.rvm/gems/ruby-2.2.1/gems/sass-3.3.13/lib/sass/tree/visitors/base.rb:52:in `block in visit_children'
+/Users/Admin/.rvm/gems/ruby-2.2.1/gems/sass-3.3.13/lib/sass/tree/visitors/base.rb:52:in `map'
+/Users/Admin/.rvm/gems/ruby-2.2.1/gems/sass-3.3.13/lib/sass/tree/visitors/base.rb:52:in `visit_children'
+/Users/Admin/.rvm/gems/ruby-2.2.1/gems/sass-3.3.13/lib/sass/tree/visitors/perform.rb:161:in `block in visit_children'
+/Users/Admin/.rvm/gems/ruby-2.2.1/gems/sass-3.3.13/lib/sass/tree/visitors/perform.rb:173:in `with_environment'
+/Users/Admin/.rvm/gems/ruby-2.2.1/gems/sass-3.3.13/lib/sass/tree/visitors/perform.rb:160:in `visit_children'
+/Users/Admin/.rvm/gems/ruby-2.2.1/gems/sass-3.3.13/lib/sass/tree/visitors/base.rb:36:in `block in visit'
+/Users/Admin/.rvm/gems/ruby-2.2.1/gems/sass-3.3.13/lib/sass/tree/visitors/perform.rb:180:in `visit_root'
+/Users/Admin/.rvm/gems/ruby-2.2.1/gems/sass-3.3.13/lib/sass/tree/visitors/base.rb:36:in `visit'
+/Users/Admin/.rvm/gems/ruby-2.2.1/gems/sass-3.3.13/lib/sass/tree/visitors/perform.rb:151:in `visit'
+/Users/Admin/.rvm/gems/ruby-2.2.1/gems/sass-3.3.13/lib/sass/tree/visitors/perform.rb:8:in `visit'
+/Users/Admin/.rvm/gems/ruby-2.2.1/gems/sass-3.3.13/lib/sass/tree/root_node.rb:36:in `css_tree'
+/Users/Admin/.rvm/gems/ruby-2.2.1/gems/sass-3.3.13/lib/sass/tree/root_node.rb:20:in `render'
+/Users/Admin/.rvm/gems/ruby-2.2.1/gems/sass-3.3.13/lib/sass/engine.rb:274:in `render'
+/Users/Admin/.rvm/gems/ruby-2.2.1/gems/sass-3.3.13/lib/sass/plugin/compiler.rb:483:in `update_stylesheet'
+/Users/Admin/.rvm/gems/ruby-2.2.1/gems/sass-3.3.13/lib/sass/plugin/compiler.rb:214:in `block in update_stylesheets'
+/Users/Admin/.rvm/gems/ruby-2.2.1/gems/sass-3.3.13/lib/sass/plugin/compiler.rb:208:in `each'
+/Users/Admin/.rvm/gems/ruby-2.2.1/gems/sass-3.3.13/lib/sass/plugin/compiler.rb:208:in `update_stylesheets'
+/Users/Admin/.rvm/gems/ruby-2.2.1/gems/compass-1.0.1/lib/compass/sass_compiler.rb:40:in `compile!'
+/Users/Admin/.rvm/gems/ruby-2.2.1/gems/compass-1.0.1/lib/compass/commands/update_project.rb:49:in `perform'
+/Users/Admin/.rvm/gems/ruby-2.2.1/gems/compass-1.0.1/lib/compass/commands/base.rb:18:in `execute'
+/Users/Admin/.rvm/gems/ruby-2.2.1/gems/compass-1.0.1/lib/compass/commands/project_base.rb:19:in `execute'
+/Users/Admin/.rvm/gems/ruby-2.2.1/gems/compass-1.0.1/lib/compass/exec/sub_command_ui.rb:43:in `perform!'
+/Users/Admin/.rvm/gems/ruby-2.2.1/gems/compass-1.0.1/lib/compass/exec/sub_command_ui.rb:15:in `run!'
+/Users/Admin/.rvm/gems/ruby-2.2.1/gems/compass-1.0.1/bin/compass:30:in `block in <top (required)>'
+/Users/Admin/.rvm/gems/ruby-2.2.1/gems/compass-1.0.1/bin/compass:44:in `call'
+/Users/Admin/.rvm/gems/ruby-2.2.1/gems/compass-1.0.1/bin/compass:44:in `<top (required)>'
+/Users/Admin/.rvm/gems/ruby-2.2.1/bin/compass:23:in `load'
+/Users/Admin/.rvm/gems/ruby-2.2.1/bin/compass:23:in `<main>'
+/Users/Admin/.rvm/gems/ruby-2.2.1/bin/ruby_executable_hooks:15:in `eval'
+/Users/Admin/.rvm/gems/ruby-2.2.1/bin/ruby_executable_hooks:15:in `<main>'
+*/
+body:before {
+  white-space: pre;
+  font-family: monospace;
+  content: "Syntax error: Undefined mixin 'add-grid'.\A         on line 1 of /Users/Admin/Sites/Trinkiter/Trinkiter/src/styles/partials/blocks.scss, in `add-grid'\A         from line 1 of /Users/Admin/Sites/Trinkiter/Trinkiter/src/styles/partials/blocks.scss\A \A 1: @include add-grid(8);\A 2: @include add-gutter(0);\A 3: \A 4: .test-blocks {\A 5:   width: 100%;\A 6:   height: 100%;"; }

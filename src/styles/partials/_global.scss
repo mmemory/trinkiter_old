@@ -3,9 +3,19 @@ body {
   height: 100%;
   padding: 0;
   margin: 0;
+  font-family: $font-stack;
 }
 
-//.wrapper-main--view {
-//  height: 100%;
-//  width: 100%;
-//}
+p {
+  letter-spacing: 1px;
+}
+
+a {
+  text-decoration: none;
+  color: $link-color;
+
+  &:hover {
+    color: $link-hover-color;
+
+  }
+}

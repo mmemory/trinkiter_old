@@ -5,18 +5,28 @@
 		<title>Trinkiter</title>
 		<link rel="stylesheet" href="build/css/styles.css"/>
 	</head>
-	<body ng-controller="MainController">
+	<body>
+		<section class="test-blocks">
+			<div class="block red"></div>
+			<div class="block blue"></div>
+			<div class="block green"></div>
+			<div class="block yellow"></div>
+		</section>
 
 		<!-- Begin Static Header -->
 		<header class="header-main"></header><!-- End Static Header -->
 
 		<!-- Begin Template Wrapper -->
-		<section class="wrapper-main--view" ng-view></section>
+		<section class="page wrapper-main--view {{pageClass}}" ng-view></section>
+		
+
+
 
 
 		
 		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
 		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular-route.min.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular-animate.min.js"></script>
 		<script src="https://cdn.firebase.com/js/client/2.2.2/firebase.js"></script>
 		<script src="https://cdn.firebase.com/libs/angularfire/1.0.0/angularfire.min.js"></script>
 		<!--<script src="build/js/scripts.js"></script>-->

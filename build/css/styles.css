@@ -1,9 +1,80 @@
+@import url(http://fonts.googleapis.com/css?family=Raleway:100,400,300,200);
 /* line 1, ../../src/styles/partials/_global.scss */
 body {
   width: 100%;
   height: 100%;
   padding: 0;
   margin: 0;
+  font-family: "Raleway", sans-serif;
+}
+
+/* line 9, ../../src/styles/partials/_global.scss */
+p {
+  letter-spacing: 1px;
+}
+
+/* line 13, ../../src/styles/partials/_global.scss */
+a {
+  text-decoration: none;
+  color: #0b97c4;
+}
+/* line 17, ../../src/styles/partials/_global.scss */
+a:hover {
+  color: #41c9f4;
+}
+
+/* line 4, ../../src/styles/partials/_blocks.scss */
+.test-blocks {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  z-index: -999;
+  top: 0;
+  left: 0;
+}
+/* line 13, ../../src/styles/partials/_blocks.scss */
+.test-blocks .block {
+  height: 100%;
+  width: 25%;
+  clear: right;
+  float: left;
+  margin-left: 0;
+  margin-right: 0%;
+}
+/* line 20, ../../src/styles/partials/_blocks.scss */
+.test-blocks .red {
+  background: url("https://unsplash.imgix.net/photo-1429371527702-1bfdc0eeea7d?dpr=2&fit=crop&fm=jpg&h=650&q=75&w=950") no-repeat;
+}
+/* line 24, ../../src/styles/partials/_blocks.scss */
+.test-blocks .blue {
+  background: url("https://ununsplash.imgix.net/photo-1429105049372-8d928fd29ba1?dpr=2&fit=crop&fm=jpg&h=650&q=75&w=950") no-repeat;
+}
+/* line 28, ../../src/styles/partials/_blocks.scss */
+.test-blocks .green {
+  background: url("https://ununsplash.imgix.net/photo-1422433555807-2559a27433bd?dpr=2&fit=crop&fm=jpg&h=650&q=75&w=950") no-repeat;
+}
+/* line 32, ../../src/styles/partials/_blocks.scss */
+.test-blocks .yellow {
+  background: url("https://unsplash.imgix.net/photo-1420819453217-57b6badd9e19?dpr=2&fit=crop&fm=jpg&h=625&q=75&w=950") no-repeat;
+}
+
+/* line 1, ../../src/styles/partials/_heroSection.scss */
+.wrapper-main--text {
+  width: 100%;
+  text-align: center;
+  color: #555555;
+}
+/* line 7, ../../src/styles/partials/_heroSection.scss */
+.wrapper-main--text h1 {
+  font-size: 2.4rem;
+  font-weight: 200;
+  margin-bottom: 0;
+  margin-top: 0;
+}
+/* line 14, ../../src/styles/partials/_heroSection.scss */
+.wrapper-main--text h2 {
+  font-size: 1.4rem;
+  font-weight: 200;
 }
 
 /* line 1, ../../src/styles/partials/_header.scss */
@@ -17,15 +88,68 @@ body {
 .wrapper-main--transparent {
   width: 100%;
   height: 100%;
-  opacity: .95;
+  background: url("../../../src/styles/assets/texture-trans.png");
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -50;
+  padding-top: 200px;
+  box-sizing: border-box;
 }
 
-/* line 8, ../../src/styles/partials/_mainForm.scss */
+/* line 15, ../../src/styles/partials/_mainForm.scss */
 .form-main--form {
   text-align: center;
-  margin-top: 50px;
+  margin-top: 30px;
+  position: relative;
+  z-index: 101;
 }
-/* line 12, ../../src/styles/partials/_mainForm.scss */
+/* line 21, ../../src/styles/partials/_mainForm.scss */
+.form-main--form .error-form--text {
+  color: #ff6666;
+  position: relative;
+}
+/* line 28, ../../src/styles/partials/_mainForm.scss */
 .form-main--form .form-main--input {
   margin: 10px;
+  width: 200px;
+  height: 40px;
+  border-radius: 5px;
+  color: #555555;
+  font-size: 1rem;
+  font-weight: 100;
+  outline: 0;
+  border: solid 1px #0b97c4;
+  letter-spacing: 1px;
+  transition: .2s;
+}
+/* line 42, ../../src/styles/partials/_mainForm.scss */
+.form-main--form .form-main--email, .form-main--form .form-main--pass {
+  padding-left: 10px;
+}
+/* line 45, ../../src/styles/partials/_mainForm.scss */
+.form-main--form .form-main--email:focus, .form-main--form .form-main--pass:focus {
+  border-color: #087294;
+  border-width: 1px;
+  width: 240px;
+  transition: .3s;
+}
+/* line 53, ../../src/styles/partials/_mainForm.scss */
+.form-main--form .form-main--button {
+  border: none;
+  cursor: pointer;
+  background-color: #0b97c4;
+  color: #ffffff;
+  font-weight: 100;
+  transition: .2s;
+}
+/* line 61, ../../src/styles/partials/_mainForm.scss */
+.form-main--form .form-main--button:hover {
+  background-color: #0caadc;
+  transition: .3s;
+}
+
+/* line 68, ../../src/styles/partials/_mainForm.scss */
+.form-register {
+  margin-top: -30px;
 }

@@ -1,4 +1,4 @@
-var app = angular.module('trinkApp', ['ngRoute', 'firebase']);
+var app = angular.module('trinkApp', ['ngRoute', 'firebase', 'ngAnimate']);
 
 app.constant('fb', {
     url: 'https://trinkiter.firebaseio.com/'

@@ -1,4 +1,4 @@
-var app = angular.module('trinkApp', ['ngRoute', 'firebase']);
+var app = angular.module('trinkApp', ['ngRoute', 'firebase', 'ngAnimate']);
 
 app.constant('fb', {
     url: 'https://trinkiter.firebaseio.com/'
@@ -38,6 +38,8 @@ var app = angular.module('trinkApp');
 
 app.controller('loginControl', function($scope, MainService) {
 
+    $scope.pageClass = 'page-login';
+
     // Login
     $scope.login = function() {
 
@@ -47,8 +49,6 @@ app.controller('loginControl', function($scope, MainService) {
                 $scope.newPass = 'Forgot your password?'
             });
     }
-
-
 });
 var app = angular.module('trinkApp');
 
@@ -56,7 +56,7 @@ app.controller('registerControl', function($scope, MainService, fb, $firebaseAut
 
     $scope.user = {};
 
-
+    $scope.pageClass = 'page-register';
 
     $scope.register = function() {
         MainService.registerUser($scope.user.email, $scope.user.password)
