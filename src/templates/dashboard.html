@@ -1,6 +1,6 @@
 <nav class="nav-dashboard">
-
 	<p class="icon-plus" ng-click='toggleModal()'><i class="fa fa-plus"></i></p>
+
 	<a href="#/login"><p class="icon-logout"><i class="fa fa-sign-out"></i></p></a>
 </nav>
 
@@ -8,6 +8,7 @@
 <section class="modal-wrapper animate-fade" ng-show="modalShown">
 	<section class="modal-add--wrapper">
 		<p class="icon-close" ng-click="toggleModal()"><i class="fa fa-times"></i></p>
+
 		<h2>add an item</h2>
 
 		<form class="form-main--form" name="addItem" ng-submit="submitNewBlock()">
@@ -15,7 +16,7 @@
 					ng-model="block.imageurl"/>
 			<input class="form-main--input form-main--text" type="text" placeholder="title"
 					ng-model="block.title"/>
-			<textarea class="form-main--input form-main--textarea" placeholder="description"
+			<textarea class="form-main--input form-main--textarea" placeholder="description" maxlength="177"
 					ng-model="block.description"></textarea>
 			<button class="form-main--input form-main--button" type="submit">add</button>
 
@@ -25,17 +26,29 @@
 
 <!-- Begin Dashboard Content -->
 <section class="wrapper-dashboard">
+
 	<!-- Begin Block -->
 	<section class="blocks">
 		<div class="block"
 				ng-repeat="block in blocks">
-			<img ng-src="{{block.imageurl}}" alt="{{block.title}}" width="300px"/>
+			<div class="image-clip">
+				<img class="block-image" ng-src="{{block.imageurl}}" alt="{{block.title}}"/>
+			</div>
 
-			<h3>{{block.title}}</h3>
+			<div class="text-wrapper">
+				<h3 class="block-title">{{block.title}}</h3>
 
-			<p>{{block.description}}</p>
+				<p class="block-description">{{block.description}}</p>
+			</div>
+
+			<div class="icon-wrapper">
+				<p class="icon-check"><i class="fa fa-check-circle-o"></i></p>
+				<p class="icon-trash"><i class="fa fa-trash-o"></i></p>
+			</div>
 		</div>
 
-	</section><!-- End Block -->
+	</section>
+	<!-- End Block -->
+
 </section><!-- End Dashboard Content -->
 

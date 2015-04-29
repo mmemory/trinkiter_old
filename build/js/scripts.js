@@ -151,6 +151,9 @@ app.controller('dashControl', function($scope, MainService, $rootScope) {
     $scope.modalShown = false;
     $scope.toggleModal = function() {
         $scope.modalShown = !$scope.modalShown;
+        $scope.block.imageurl = '';
+        $scope.block.title = '';
+        $scope.block.description = '';
     };
 });
 var app = angular.module('trinkApp');

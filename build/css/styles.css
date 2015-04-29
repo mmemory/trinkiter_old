@@ -23,6 +23,80 @@ a:hover {
   color: #4ec1f6;
 }
 
+/* line 4, ../../src/styles/partials/_blocks.scss */
+.blocks {
+  width: 100%;
+  height: 100%;
+  padding: 20px;
+  box-sizing: border-box;
+}
+/* line 10, ../../src/styles/partials/_blocks.scss */
+.blocks .block {
+  width: 23.72881%;
+  clear: right;
+  float: left;
+  margin-left: 0;
+  margin-right: 1.69492%;
+  border: solid 1px #0b94d3;
+  border-radius: 5px;
+  height: 420px;
+  padding: 10px;
+  margin: 10px;
+}
+/* line 19, ../../src/styles/partials/_blocks.scss */
+.blocks .block .image-clip {
+  width: 100%;
+  height: 170px;
+  overflow: hidden;
+  border-radius: 5px;
+}
+/* line 25, ../../src/styles/partials/_blocks.scss */
+.blocks .block .image-clip .block-image {
+  width: 100%;
+  min-height: 170px;
+  display: block;
+  margin: 0 auto;
+}
+/* line 33, ../../src/styles/partials/_blocks.scss */
+.blocks .block .block-title {
+  color: #0b94d3;
+}
+/* line 37, ../../src/styles/partials/_blocks.scss */
+.blocks .block .block-description {
+  width: 100%;
+}
+/* line 41, ../../src/styles/partials/_blocks.scss */
+.blocks .block .text-wrapper {
+  height: 200px;
+}
+/* line 45, ../../src/styles/partials/_blocks.scss */
+.blocks .block .icon-wrapper {
+  height: 20px;
+  width: 100%;
+  float: left;
+}
+/* line 51, ../../src/styles/partials/_blocks.scss */
+.blocks .block .icon-trash, .blocks .block .icon-check {
+  font-size: 30px;
+  position: relative;
+  bottom: 40px;
+  display: block;
+  cursor: pointer;
+  color: #0b94d3;
+}
+/* line 59, ../../src/styles/partials/_blocks.scss */
+.blocks .block .icon-trash:hover, .blocks .block .icon-check:hover {
+  color: #4ec1f6;
+}
+/* line 64, ../../src/styles/partials/_blocks.scss */
+.blocks .block .icon-trash {
+  float: left;
+}
+/* line 68, ../../src/styles/partials/_blocks.scss */
+.blocks .block .icon-check {
+  float: right;
+}
+
 /* line 1, ../../src/styles/partials/_heroSection.scss */
 .wrapper-main--text {
   width: 100%;
@@ -227,7 +301,7 @@ a:hover {
   cursor: pointer;
   position: absolute;
   top: 110px;
-  right: 420px;
+  right: 440px;
   font-size: 30px;
   margin: 0;
   color: #0b94d3;
@@ -252,39 +326,40 @@ a:hover {
   background-color: #555555;
   box-shadow: 0 -1px 2px 0 #333333;
   transition: .2s;
+  box-sizing: border-box;
 }
-/* line 8, ../../src/styles/partials/_dashboardNav.scss */
+/* line 9, ../../src/styles/partials/_dashboardNav.scss */
 .nav-dashboard p {
   display: inline;
   color: #ffffff;
   cursor: pointer;
 }
-/* line 13, ../../src/styles/partials/_dashboardNav.scss */
+/* line 14, ../../src/styles/partials/_dashboardNav.scss */
 .nav-dashboard p a {
   color: #ffffff;
 }
-/* line 17, ../../src/styles/partials/_dashboardNav.scss */
+/* line 18, ../../src/styles/partials/_dashboardNav.scss */
 .nav-dashboard p:hover, .nav-dashboard p a:hover {
   color: #0b94d3;
 }
-/* line 22, ../../src/styles/partials/_dashboardNav.scss */
+/* line 23, ../../src/styles/partials/_dashboardNav.scss */
 .nav-dashboard .icon-plus {
   margin: 0 0 0 20px;
   color: #ffffff;
 }
-/* line 26, ../../src/styles/partials/_dashboardNav.scss */
+/* line 27, ../../src/styles/partials/_dashboardNav.scss */
 .nav-dashboard .icon-plus:after {
   content: 'new item';
   position: relative;
   left: 5px;
   bottom: 1px;
 }
-/* line 34, ../../src/styles/partials/_dashboardNav.scss */
+/* line 35, ../../src/styles/partials/_dashboardNav.scss */
 .nav-dashboard .icon-logout {
   color: #ffffff;
   margin: 0 0 0 20px;
 }
-/* line 38, ../../src/styles/partials/_dashboardNav.scss */
+/* line 39, ../../src/styles/partials/_dashboardNav.scss */
 .nav-dashboard .icon-logout:after {
   content: 'logout';
   position: relative;

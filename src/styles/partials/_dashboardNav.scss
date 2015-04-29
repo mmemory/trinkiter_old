@@ -4,6 +4,7 @@
   background-color: $body-color;
   box-shadow: 0 -1px 2px 0 lighten(#000000, 20%);
   transition: .2s;
+  box-sizing: border-box;
 
   p {
     display: inline;
