@@ -29,46 +29,47 @@ a:hover {
   padding: 7px;
   background-color: #555555;
   box-shadow: 0 -1px 2px 0 #333333;
+  transition: .2s;
 }
-/* line 7, ../../src/styles/partials/_blocks.scss */
+/* line 8, ../../src/styles/partials/_blocks.scss */
 .nav-dashboard p {
   display: inline;
   color: #ffffff;
   cursor: pointer;
 }
-/* line 12, ../../src/styles/partials/_blocks.scss */
+/* line 13, ../../src/styles/partials/_blocks.scss */
 .nav-dashboard p a {
   color: #ffffff;
 }
-/* line 16, ../../src/styles/partials/_blocks.scss */
+/* line 17, ../../src/styles/partials/_blocks.scss */
 .nav-dashboard p:hover, .nav-dashboard p a:hover {
   color: #0b94d3;
 }
-/* line 21, ../../src/styles/partials/_blocks.scss */
+/* line 22, ../../src/styles/partials/_blocks.scss */
 .nav-dashboard .icon-plus {
   margin: 0 0 0 20px;
   color: #ffffff;
 }
-/* line 25, ../../src/styles/partials/_blocks.scss */
+/* line 26, ../../src/styles/partials/_blocks.scss */
 .nav-dashboard .icon-plus:after {
   content: 'new item';
   position: relative;
   left: 5px;
   bottom: 1px;
 }
-/* line 33, ../../src/styles/partials/_blocks.scss */
+/* line 34, ../../src/styles/partials/_blocks.scss */
 .nav-dashboard .icon-logout {
   color: #ffffff;
   margin: 0 0 0 20px;
 }
-/* line 37, ../../src/styles/partials/_blocks.scss */
+/* line 38, ../../src/styles/partials/_blocks.scss */
 .nav-dashboard .icon-logout:after {
   content: 'logout';
   position: relative;
   left: 5px;
 }
 
-/* line 45, ../../src/styles/partials/_blocks.scss */
+/* line 46, ../../src/styles/partials/_blocks.scss */
 .wrapper-dashboard {
   width: 100%;
   height: 100%;
@@ -147,17 +148,30 @@ a:hover {
   transition: .2s;
 }
 /* line 42, ../../src/styles/partials/_mainForm.scss */
-.form-main--form .form-main--email, .form-main--form .form-main--pass {
+.form-main--form .form-main--text {
   padding-left: 10px;
 }
 /* line 45, ../../src/styles/partials/_mainForm.scss */
-.form-main--form .form-main--email:focus, .form-main--form .form-main--pass:focus {
+.form-main--form .form-main--text:focus {
   border-color: #0872a3;
-  border-width: 1px;
   width: 240px;
   transition: .3s;
 }
-/* line 53, ../../src/styles/partials/_mainForm.scss */
+/* line 52, ../../src/styles/partials/_mainForm.scss */
+.form-main--form .form-main--textarea {
+  width: 207px;
+  height: 100px;
+  padding: 10px;
+  transition: .2s;
+  resize: none;
+}
+/* line 59, ../../src/styles/partials/_mainForm.scss */
+.form-main--form .form-main--textarea:focus {
+  border-color: #0872a3;
+  width: 275px;
+  transition: .2s;
+}
+/* line 66, ../../src/styles/partials/_mainForm.scss */
 .form-main--form .form-main--button {
   border: none;
   cursor: pointer;
@@ -166,62 +180,57 @@ a:hover {
   font-weight: 100;
   transition: .2s;
 }
-/* line 61, ../../src/styles/partials/_mainForm.scss */
+/* line 74, ../../src/styles/partials/_mainForm.scss */
 .form-main--form .form-main--button:hover {
   background-color: #0ca5eb;
   transition: .3s;
 }
 
-/* line 68, ../../src/styles/partials/_mainForm.scss */
+/* line 81, ../../src/styles/partials/_mainForm.scss */
 .form-register {
   margin-top: -30px;
 }
 
 /* line 1, ../../src/styles/partials/_modal.scss */
-.ng-modal-overlay {
-  /* A dark translucent div that covers the whole screen */
-  position: absolute;
-  z-index: 9999;
-  top: 0;
-  left: 0;
+.modal-wrapper {
   width: 100%;
   height: 100%;
-  background-color: #000000;
-  opacity: 0.8;
+  background-color: rgba(100, 100, 100, 0.95);
+  position: fixed;
+  z-index: 1000;
+  padding-top: 100px;
+  top: 0;
 }
 
-/* line 12, ../../src/styles/partials/_modal.scss */
-.ng-modal-dialog {
-  /* A centered div above the overlay with a box shadow. */
-  z-index: 10000;
-  position: absolute;
-  width: 50%;
-  /* Default */
-  /* Center the dialog */
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  -webkit-transform: translate(-50%, -50%);
-  -moz-transform: translate(-50%, -50%);
-  background-color: #fff;
-  box-shadow: 4px 4px 80px #000;
+/* line 11, ../../src/styles/partials/_modal.scss */
+.modal-add--wrapper {
+  width: 30%;
+  height: 400px;
+  background-color: #ffffff;
+  margin: 0 auto;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 5px 26px -5px black;
+}
+/* line 20, ../../src/styles/partials/_modal.scss */
+.modal-add--wrapper h2 {
+  margin: 0;
+  color: #0b94d3;
+  font-weight: 200;
 }
 
 /* line 28, ../../src/styles/partials/_modal.scss */
-.ng-modal-dialog-content {
-  padding: 10px;
-  text-align: left;
-}
-
-/* line 32, ../../src/styles/partials/_modal.scss */
-.ng-modal-close {
-  position: absolute;
-  top: 3px;
-  right: 5px;
-  padding: 5px;
+.icon-close {
   cursor: pointer;
-  font-size: 120%;
-  display: inline-block;
-  font-weight: bold;
-  font-family: 'arial', 'sans-serif';
+  position: absolute;
+  top: 110px;
+  right: 420px;
+  font-size: 30px;
+  margin: 0;
+  color: #0b94d3;
+}
+/* line 37, ../../src/styles/partials/_modal.scss */
+.icon-close:hover {
+  color: #4ec1f6;
+  transition: .2s;
 }

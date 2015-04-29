@@ -1,11 +1,31 @@
 <nav class="nav-dashboard">
+
 	<p class="icon-plus" ng-click='toggleModal()'><i class="fa fa-plus"></i></p>
 	<a href="#/login"><p class="icon-logout"><i class="fa fa-sign-out"></i></p></a>
 </nav>
+
+<!-- Begin Modal Window -->
+<section class="modal-wrapper" ng-show="modalShown">
+	<section class="modal-add--wrapper">
+		<p class="icon-close" ng-click="toggleModal()"><i class="fa fa-times"></i></p>
+		<h2>add an item</h2>
+
+		<form class="form-main--form" name="addItem" ng-submit="submitNewBlock()">
+			<input class="form-main--input form-main--text" type="text" placeholder="image url"
+					ng-model="block.imageurl"/>
+			<input class="form-main--input form-main--text" type="text" placeholder="title"
+					ng-model="block.title"/>
+			<textarea class="form-main--input form-main--textarea" placeholder="description"
+					ng-model="block.description"></textarea>
+			<button class="form-main--input form-main--button" type="submit">add</button>
+
+		</form>
+	</section>
+</section><!-- End Modal Window -->
+
+<!-- Begin Dashboard Content -->
 <section class="wrapper-dashboard">
-
-	<modal-dialog show='modalShown' width='750px' height='60%'></modal-dialog>
-
+	<!-- Begin Block -->
 	<section class="blocks">
 		<div class="block"
 				ng-repeat="block in blocks">
@@ -16,6 +36,6 @@
 			<p>{{block.description}}</p>
 		</div>
 
-	</section>
-</section>
+	</section><!-- End Block -->
+</section><!-- End Dashboard Content -->
 

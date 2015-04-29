@@ -39,14 +39,27 @@
     transition: .2s;
   }
 
-  .form-main--email, .form-main--pass {
+  .form-main--text {
     padding-left: 10px;
 
     &:focus {
       border-color: darken($component-color, 10%);
-      border-width: 1px;
       width: 240px;
       transition: .3s;
+    }
+  }
+
+  .form-main--textarea {
+    width: 207px;
+    height: 100px;
+    padding: 10px;
+    transition: .2s;
+    resize: none;
+
+    &:focus {
+      border-color: darken($component-color, 10%);
+      width: 275px;
+      transition: .2s;
     }
   }
 

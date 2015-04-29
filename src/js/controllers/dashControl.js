@@ -7,7 +7,6 @@ app.controller('dashControl', function($scope, MainService, $rootScope) {
     $scope.getUser = function() {
         if (MainService.returnUser()) {
             $rootScope.user = MainService.returnUser();
-            //localStorage.user = JSON.stringify($rootScope.user);
         }
     };
 
@@ -28,10 +27,11 @@ app.controller('dashControl', function($scope, MainService, $rootScope) {
         $scope.block.imageurl = '';
         $scope.block.title = '';
         $scope.block.description = '';
+        $scope.modalShown = false;
     };
 
-
-    $scope.modalShown = false;
+    // Toggle modal window for adding new block
+    $scope.modalShown = true;
     $scope.toggleModal = function() {
         $scope.modalShown = !$scope.modalShown;
     };
