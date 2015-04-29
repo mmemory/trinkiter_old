@@ -1,12 +1,12 @@
-
-.ng-hide-add {
-  -webkit-animation: 0.5s fadeOut ease;
-  animation: 0.5s fadeOut ease;
+// Modal Window fade for add item on dashboard
+.animate-fade.ng-hide-add {
+  -webkit-animation: 0.5s fadeOut linear;
+  animation: 0.2s fadeOut linear;
 }
 
-.ng-hide-remove {
-  -webkit-animation: 0.5s fadeIn ease;
-  animation: 0.5s fadeIn ease;
+.animate-fade.ng-hide-remove {
+  -webkit-animation: 0.5s fadeIn linear;
+  animation: 0.2s fadeIn linear;
 }
 
 @-webkit-keyframes fadeOut {

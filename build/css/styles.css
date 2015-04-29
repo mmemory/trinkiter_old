@@ -192,15 +192,15 @@ a:hover {
 }
 
 /* line 2, ../../src/styles/partials/_animations.scss */
-.ng-hide-add {
-  -webkit-animation: 0.5s fadeOut ease;
-  animation: 0.5s fadeOut ease;
+.animate-fade.ng-hide-add {
+  -webkit-animation: 0.5s fadeOut linear;
+  animation: 0.2s fadeOut linear;
 }
 
 /* line 7, ../../src/styles/partials/_animations.scss */
-.ng-hide-remove {
-  -webkit-animation: 0.5s fadeIn ease;
-  animation: 0.5s fadeIn ease;
+.animate-fade.ng-hide-remove {
+  -webkit-animation: 0.5s fadeIn linear;
+  animation: 0.2s fadeIn linear;
 }
 
 @-webkit-keyframes fadeOut {
