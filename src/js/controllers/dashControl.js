@@ -31,7 +31,7 @@ app.controller('dashControl', function($scope, MainService, $rootScope) {
     };
 
     // Toggle modal window for adding new block
-    $scope.modalShown = true;
+    $scope.modalShown = false;
     $scope.toggleModal = function() {
         $scope.modalShown = !$scope.modalShown;
     };

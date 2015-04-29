@@ -191,6 +191,62 @@ a:hover {
   margin-top: -30px;
 }
 
+/* line 2, ../../src/styles/partials/_animations.scss */
+.ng-hide-add {
+  -webkit-animation: 0.5s fadeOut ease;
+  animation: 0.5s fadeOut ease;
+}
+
+/* line 7, ../../src/styles/partials/_animations.scss */
+.ng-hide-remove {
+  -webkit-animation: 0.5s fadeIn ease;
+  animation: 0.5s fadeIn ease;
+}
+
+@-webkit-keyframes fadeOut {
+  /* line 13, ../../src/styles/partials/_animations.scss */
+  from {
+    opacity: 1;
+  }
+
+  /* line 14, ../../src/styles/partials/_animations.scss */
+  to {
+    opacity: 0;
+  }
+}
+@keyframes fadeOut {
+  /* line 18, ../../src/styles/partials/_animations.scss */
+  from {
+    opacity: 1;
+  }
+
+  /* line 19, ../../src/styles/partials/_animations.scss */
+  to {
+    opacity: 0;
+  }
+}
+@-webkit-keyframes fadeIn {
+  /* line 23, ../../src/styles/partials/_animations.scss */
+  from {
+    opacity: 0;
+  }
+
+  /* line 24, ../../src/styles/partials/_animations.scss */
+  to {
+    opacity: 1;
+  }
+}
+@keyframes fadeIn {
+  /* line 28, ../../src/styles/partials/_animations.scss */
+  from {
+    opacity: 0;
+  }
+
+  /* line 29, ../../src/styles/partials/_animations.scss */
+  to {
+    opacity: 1;
+  }
+}
 /* line 1, ../../src/styles/partials/_modal.scss */
 .modal-wrapper {
   width: 100%;
@@ -219,7 +275,7 @@ a:hover {
   font-weight: 200;
 }
 
-/* line 28, ../../src/styles/partials/_modal.scss */
+/* line 27, ../../src/styles/partials/_modal.scss */
 .icon-close {
   cursor: pointer;
   position: absolute;
@@ -229,7 +285,7 @@ a:hover {
   margin: 0;
   color: #0b94d3;
 }
-/* line 37, ../../src/styles/partials/_modal.scss */
+/* line 36, ../../src/styles/partials/_modal.scss */
 .icon-close:hover {
   color: #4ec1f6;
   transition: .2s;

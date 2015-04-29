@@ -1,33 +1,30 @@
-//.page.ng-leave 	{ z-index:9999; }
-//.page.ng-enter 	{ z-index:8888; }
-//
-//.page-login.ng-enter, .page-register.ng-enter { animation:slideInRight 0.5s both ease-in; }
-//.page-login.ng-leave, .page-register.ng-leave { animation:slideOutLeft 0.5s both ease-in; }
-//
-//@keyframes slideInRight {
-//  from 	{ transform:translateX(100%); }
-//  to 		{ transform: translateX(50%); }
-//}
-//@-moz-keyframes slideInRight {
-//  from 	{ -moz-transform:translateX(100%); }
-//  to 		{ -moz-transform: translateX(50%); }
-//}
-//@-webkit-keyframes slideInRight {
-//  from 	{ -webkit-transform:translateX(100%); }
-//  to 		{ -webkit-transform: translateX(50%); }
-//}
-//
-//
-//@keyframes slideOutLeft {
-//  from 	{ transform:translateX(0); }
-//  to 		{ transform: translateX(100%); }
-//}
-//@-moz-keyframes slideOutLeft {
-//  from 	{ -moz-transform:translateX(0); }
-//  to 		{ -moz-transform: translateX(100%); }
-//}
-//@-webkit-keyframes slideOutLeft {
-//  from 	{ -webkit-transform:translateX(0); }
-//  to 		{ -webkit-transform: translateX(100%); }
-//}
 
+.ng-hide-add {
+  -webkit-animation: 0.5s fadeOut ease;
+  animation: 0.5s fadeOut ease;
+}
+
+.ng-hide-remove {
+  -webkit-animation: 0.5s fadeIn ease;
+  animation: 0.5s fadeIn ease;
+}
+
+@-webkit-keyframes fadeOut {
+  from {opacity: 1;}
+  to {opacity: 0;}
+}
+
+@keyframes fadeOut {
+  from {opacity: 1;}
+  to {opacity: 0;}
+}
+
+@-webkit-keyframes fadeIn {
+  from {opacity: 0;}
+  to {opacity: 1;}
+}
+
+@keyframes fadeIn {
+  from {opacity: 0;}
+  to {opacity: 1;}
+}
