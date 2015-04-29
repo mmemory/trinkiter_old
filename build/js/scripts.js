@@ -15,7 +15,7 @@ app.config(function($routeProvider) {
             controller: 'registerControl'
         })
         .when('/dashboard/:userId', {
-            templateUrl: 'src/templates/dashboard',
+            templateUrl: 'src/templates/dashboard.html',
             controller: 'dashControl'
         })
         .
@@ -61,7 +61,13 @@ app.controller('dashControl', function($scope, MainService, $rootScope) {
         $scope.block.imageurl = '';
         $scope.block.title = '';
         $scope.block.description = '';
-    }
+    };
+
+
+    $scope.modalShown = false;
+    $scope.toggleModal = function() {
+        $scope.modalShown = !$scope.modalShown;
+    };
 });
 var app = angular.module('trinkApp');
 
@@ -127,6 +133,37 @@ app.controller('resetPassControl', function($scope, MainService) {
 });
 var app = angular.module('trinkApp');
 
+app.directive('modalDialog', function() {
+    return {
+        restrict: 'E',
+        scope: {
+            show: '='
+        },
+        replace: true,
+        transclue: true,
+        link: function(scope, elem, attrs) {
+            scope.dialogStyle = {};
+            if (attrs.width) {
+                scope.dialogStyle.width = attrs.width;
+            }
+            if (attrs.height) {
+                scope.dialogStyle.height = attrs.height;
+            }
+            scope.hideModal = function() {
+                scope.show = false;
+            }
+        },
+        template: "<div class='ng-modal' ng-show='show'>" +
+                    "<div class='ng-modal-overlay' ng-click='hideModal()'></div>" +
+                    "<div class='ng-modal-dialog' ng-style='dialogStyle'>" +
+                    "<div class='ng-modal-close' ng-click='hideModal()'>X</div>" +
+                    "<div class='ng-modal-dialog-content' ng-transclude></div>" +
+                    "</div>" +
+                    "</div>"
+    }
+});
+var app = angular.module('trinkApp');
+
 app.service('MainService', function(fb, $firebaseAuth, $location, $firebaseArray, $firebaseObject, $q) {
 
     ///////////////////////////////////////////
@@ -177,33 +214,9 @@ app.service('MainService', function(fb, $firebaseAuth, $location, $firebaseArray
     //      Pull Data
     /////////////////////////////////////////
 
-    //var blocks = [
-    //    {
-    //        'imgsrc': 'https://unsplash.imgix.net/photo-1429371527702-1bfdc0eeea7d?dpr=2&fit=crop&fm=jpg&h=650&q=75&w=950',
-    //        'title': 'Shank pork salami',
-    //        'description': 'Ham hock jowl turkey alcatra pork belly drumstick shank. Cow pork spare ribs, fatback pastrami kielbasa strip steak pig jerky sausage andouille. Venison meatball beef, shankle doner picanha tongue leberkas. Turkey andouille leberkas frankfurter alcatra filet mignon meatball tongue fatback doner pork belly strip steak sirloin t-bone. Flank beef short loin jerky chuck pancetta, picanha pork loin.'
-    //    },
-    //    {
-    //        'imgsrc': 'https://ununsplash.imgix.net/photo-1429105049372-8d928fd29ba1?dpr=2&fit=crop&fm=jpg&h=650&q=75&w=950',
-    //        'title': 'Here are my trees!',
-    //        'description': 'Here are some trees I have that I don\'t need anymore.'
-    //    },
-    //    {
-    //        'imgsrc': 'https://ununsplash.imgix.net/photo-1422433555807-2559a27433bd?dpr=2&fit=crop&fm=jpg&h=650&q=75&w=950',
-    //        'title': 'Kevin pork belly',
-    //        'description': 'Venison tenderloin bresaola, cow filet mignon salami strip steak biltong meatball. Beef turkey tongue, alcatra ham capicola picanha hamburger drumstick ham hock shank meatloaf salami.'
-    //    }
-    //];
-    //
-    //this.returnBlocks = function() {
-    //    return blocks;
-    //};
-
-
     this.getBlockData = function() {
         return $firebaseObject(new Firebase(fb.url + '/blocks'));
     };
-
 
     ///////////////////////////////////////////
     //      Push Data

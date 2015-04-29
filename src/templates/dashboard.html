@@ -1,29 +1,18 @@
+<nav class="nav-dashboard">
+	<p class="icon-plus" ng-click='toggleModal()'><i class="fa fa-plus"></i></p>
+	<a href="#/login"><p class="icon-logout"><i class="fa fa-sign-out"></i></p></a>
+</nav>
 <section class="wrapper-dashboard">
-	<a href="#/login">Logout</a>
 
-	<!--<button class="form-main--input form-main--button" ng-click="getBlock()">Get Blocks</button>-->
-
-
-	<form name="dataForm" ng-submit="submitNewBlock()">
-
-		<label>Image link:</label>
-		<input type="text" name="imagelink"
-				ng-model="block.imageurl"/><br/>
-		<label>Item Title:</label>
-		<input type="text" name="title"
-				ng-model="block.title"/><br/>
-		<label>Item Description:</label>
-		<textarea name="description"
-				ng-model="block.description"></textarea><br/>
-
-		<button class="form-main--input form-main--button">Push</button>
-	</form>
+	<modal-dialog show='modalShown' width='750px' height='60%'></modal-dialog>
 
 	<section class="blocks">
 		<div class="block"
 				ng-repeat="block in blocks">
 			<img ng-src="{{block.imageurl}}" alt="{{block.title}}" width="300px"/>
+
 			<h3>{{block.title}}</h3>
+
 			<p>{{block.description}}</p>
 		</div>
 
