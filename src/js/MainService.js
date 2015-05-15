@@ -6,10 +6,9 @@ app.service('MainService', function(fb, $firebaseAuth, $location, $firebaseArray
     //      Authentication
     /////////////////////////////////////////
 
-    var user;
-
     var authObj = $firebaseAuth(new Firebase(fb.url));
     var ref = new Firebase(fb.url);
+    var user = ref.getAuth().uid;
 
     this.registerUser = function(email, password) {
         return authObj.$createUser({
@@ -50,8 +49,28 @@ app.service('MainService', function(fb, $firebaseAuth, $location, $firebaseArray
     //      Pull Data
     /////////////////////////////////////////
 
+    // Get the block data from firebase
     this.getBlockData = function() {
-        return $firebaseObject(new Firebase(fb.url + '/blocks'));
+         return $firebaseArray(new Firebase(fb.url + '/blocks'));
+    };
+
+    // Find out current user's name
+    //this.getUserName = function() {
+        //return $firebaseObject(new Firebase(fb.url + '/users/' + user)).$loaded();
+
+        //var userObj = $firebaseObject(new Firebase(fb.url + '/users/' + user));
+
+        //var dfd = $q.defer();
+        //userObj.$loaded().then(function(data) {
+            //dfd.resolve(data.userInfo.firstname);
+           //return data.userInfo.firstname;
+       // });
+        //return dfd.promise;
+
+    //};
+
+    this.getUserName = function() {
+        return $firebaseObject(new Firebase(fb.url + '/users/' + user)).$loaded();
     };
 
     ///////////////////////////////////////////
@@ -60,16 +79,17 @@ app.service('MainService', function(fb, $firebaseAuth, $location, $firebaseArray
 
     var blockObj = $firebaseArray(new Firebase(fb.url + '/blocks'));
 
-    this.pushBlockData = function(imageLink, title, description) {
+    this.pushBlockData = function(imageLink, title, description, userid) {
         var dfd = $q.defer();
         blockObj.$add({
             imageurl: imageLink,
             title: title,
-            description: description
+            description: description,
+            userid: userid
         }).then(function(data) {
             var blockId = $firebaseObject(data).$id;
             var userId = ref.getAuth().uid;
-            var userObj = $firebaseArray(new Firebase(fb.url + '/users/' + '/'+userId+'/' + '/userBlocks'));
+            var userObj = $firebaseArray(new Firebase(fb.url + '/users/' + userId + '/userBlocks'));
 
             userObj.$add({
                 blockId: blockId

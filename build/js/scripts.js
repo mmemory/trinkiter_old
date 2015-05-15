@@ -35,10 +35,9 @@ app.service('MainService', function(fb, $firebaseAuth, $location, $firebaseArray
     //      Authentication
     /////////////////////////////////////////
 
-    var user;
-
     var authObj = $firebaseAuth(new Firebase(fb.url));
     var ref = new Firebase(fb.url);
+    var user = ref.getAuth().uid;
 
     this.registerUser = function(email, password) {
         return authObj.$createUser({
@@ -79,8 +78,28 @@ app.service('MainService', function(fb, $firebaseAuth, $location, $firebaseArray
     //      Pull Data
     /////////////////////////////////////////
 
+    // Get the block data from firebase
     this.getBlockData = function() {
-        return $firebaseObject(new Firebase(fb.url + '/blocks'));
+         return $firebaseArray(new Firebase(fb.url + '/blocks'));
+    };
+
+    // Find out current user's name
+    //this.getUserName = function() {
+        //return $firebaseObject(new Firebase(fb.url + '/users/' + user)).$loaded();
+
+        //var userObj = $firebaseObject(new Firebase(fb.url + '/users/' + user));
+
+        //var dfd = $q.defer();
+        //userObj.$loaded().then(function(data) {
+            //dfd.resolve(data.userInfo.firstname);
+           //return data.userInfo.firstname;
+       // });
+        //return dfd.promise;
+
+    //};
+
+    this.getUserName = function() {
+        return $firebaseObject(new Firebase(fb.url + '/users/' + user)).$loaded();
     };
 
     ///////////////////////////////////////////
@@ -89,16 +108,17 @@ app.service('MainService', function(fb, $firebaseAuth, $location, $firebaseArray
 
     var blockObj = $firebaseArray(new Firebase(fb.url + '/blocks'));
 
-    this.pushBlockData = function(imageLink, title, description) {
+    this.pushBlockData = function(imageLink, title, description, userid) {
         var dfd = $q.defer();
         blockObj.$add({
             imageurl: imageLink,
             title: title,
-            description: description
+            description: description,
+            userid: userid
         }).then(function(data) {
             var blockId = $firebaseObject(data).$id;
             var userId = ref.getAuth().uid;
-            var userObj = $firebaseArray(new Firebase(fb.url + '/users/' + '/'+userId+'/' + '/userBlocks'));
+            var userObj = $firebaseArray(new Firebase(fb.url + '/users/' + userId + '/userBlocks'));
 
             userObj.$add({
                 blockId: blockId
@@ -117,29 +137,25 @@ app.controller('MainController', function($scope) {
 });
 var app = angular.module('trinkApp');
 
-app.controller('dashControl', function($scope, MainService, $rootScope) {
+app.controller('dashControl', function(fb, $scope, MainService, $firebaseObject) {
 
     $scope.block = {};
 
-    $scope.getUser = function() {
-        if (MainService.returnUser()) {
-            $rootScope.user = MainService.returnUser();
-        }
+    // Find out what user is on
+    var getUser = function() {
+        $scope.user = MainService.returnUser();
     };
+    getUser();
 
-    $scope.getUser();
-
-
+    // Get data from blocks database
     var getBlock = function() {
-        $scope.blocks = MainService.getBlockData()
+        $scope.blocks = MainService.getBlockData();
     };
-
     getBlock();
 
-
+    // Send data for new block to service
     $scope.submitNewBlock = function() {
-
-        MainService.pushBlockData($scope.block.imageurl, $scope.block.title, $scope.block.description);
+        MainService.pushBlockData($scope.block.imageurl, $scope.block.title, $scope.block.description, $scope.user);
 
         $scope.block.imageurl = '';
         $scope.block.title = '';
@@ -155,6 +171,19 @@ app.controller('dashControl', function($scope, MainService, $rootScope) {
         $scope.block.title = '';
         $scope.block.description = '';
     };
+
+    // Gets user name and puts it on $scope
+    var currentName = function() {
+        var obj = $firebaseObject(new Firebase(fb.url + '/blocks'));
+
+        obj.$loaded()
+            .then(function(data) {
+                $scope.currentName = data;
+            });
+        console.log($scope.currentName);
+    };
+    currentName();
+
 });
 var app = angular.module('trinkApp');
 

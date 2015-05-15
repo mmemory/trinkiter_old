@@ -1,28 +1,24 @@
 var app = angular.module('trinkApp');
 
-app.controller('dashControl', function($scope, MainService, $rootScope) {
+app.controller('dashControl', function(fb, $scope, MainService, $firebaseObject) {
 
     $scope.block = {};
 
-    $scope.getUser = function() {
-        if (MainService.returnUser()) {
-            $rootScope.user = MainService.returnUser();
-        }
+    // Find out what user is on
+    var getUser = function() {
+        $scope.user = MainService.returnUser();
     };
+    getUser();
 
-    $scope.getUser();
-
-
+    // Get data from blocks database
     var getBlock = function() {
-        $scope.blocks = MainService.getBlockData()
+        $scope.blocks = MainService.getBlockData();
     };
-
     getBlock();
 
-
+    // Send data for new block to service
     $scope.submitNewBlock = function() {
-
-        MainService.pushBlockData($scope.block.imageurl, $scope.block.title, $scope.block.description);
+        MainService.pushBlockData($scope.block.imageurl, $scope.block.title, $scope.block.description, $scope.user);
 
         $scope.block.imageurl = '';
         $scope.block.title = '';
@@ -38,4 +34,17 @@ app.controller('dashControl', function($scope, MainService, $rootScope) {
         $scope.block.title = '';
         $scope.block.description = '';
     };
+
+    // Gets user name and puts it on $scope
+    var currentName = function() {
+        var obj = $firebaseObject(new Firebase(fb.url + '/blocks'));
+
+        obj.$loaded()
+            .then(function(data) {
+                $scope.currentName = data;
+            });
+        console.log($scope.currentName);
+    };
+    currentName();
+
 });

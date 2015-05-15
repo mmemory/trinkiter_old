@@ -41,6 +41,7 @@
 
   .form-main--text {
     padding-left: 10px;
+    background-color: transparent;
 
     &:focus {
       border-color: darken($component-color, 10%);
@@ -55,6 +56,7 @@
     padding: 10px;
     transition: .2s;
     resize: none;
+    background-color: transparent;
 
     &:focus {
       border-color: darken($component-color, 10%);

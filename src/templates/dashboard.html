@@ -4,6 +4,7 @@
 	<a href="#/login"><p class="icon-logout"><i class="fa fa-sign-out"></i></p></a>
 </nav>
 
+<!--TODO fix X-icon responsiveness-->
 <!-- Begin Modal Window -->
 <section class="modal-wrapper animate-fade" ng-show="modalShown">
 	<section class="modal-add--wrapper">
@@ -30,7 +31,8 @@
 	<!-- Begin Block -->
 	<section class="blocks">
 		<div class="block"
-				ng-repeat="block in blocks">
+				ng-repeat="block in blocks"
+				ng-show="block.userid !== user">
 			<div class="image-clip">
 				<img class="block-image" ng-src="{{block.imageurl}}" alt="{{block.title}}"/>
 			</div>
