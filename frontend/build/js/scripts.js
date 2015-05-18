@@ -15,7 +15,7 @@ app.config(function($routeProvider) {
             templateUrl: 'src/templates/registerHome.html',
             controller: 'registerControl'
         })
-        .when('/dashboard/:userId', {
+        .when('/dashboard', {
             templateUrl: 'src/templates/dashboard.html',
             controller: 'dashControl'
         })
@@ -44,14 +44,14 @@ app.service('MainService', function($http, CONSTANT) {
 
         //console.log(userData);
 
-        $http.post(userUrl, userData).success(function(data) {
-            console.log('success!');
-        }).error(function(data) {
-            console.log('error', data);
-        })
+        $http.post(userUrl, userData)
+            .success(function(data) {
+                console.log('user info sent to mongodb');
+            })
+            .error(function(data) {
+                console.log('error', data);
+            })
     }
-
-
 
 
 });
@@ -76,14 +76,19 @@ app.controller('loginControl', function($scope) {
 });
 var app = angular.module('trinkApp');
 
-app.controller('registerControl', function($scope, MainService) {
+app.controller('registerControl', function($scope, MainService, $location) {
 
     $scope.user = {};
 
     $scope.registerUser = function() {
         MainService.registerUser($scope.user.email, $scope.user.firstname, $scope.user.lastname);
 
+        $scope.user.email = '';
+        $scope.user.firstname = '';
+        $scope.user.lastname = '';
+        $scope.user.password = '';
 
+        $location.path('/dashboard');
     }
 
 

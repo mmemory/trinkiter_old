@@ -19,14 +19,14 @@ app.service('MainService', function($http, CONSTANT) {
 
         //console.log(userData);
 
-        $http.post(userUrl, userData).success(function(data) {
-            console.log('success!');
-        }).error(function(data) {
-            console.log('error', data);
-        })
+        $http.post(userUrl, userData)
+            .success(function(data) {
+                console.log('user info sent to mongodb');
+            })
+            .error(function(data) {
+                console.log('error', data);
+            })
     }
-
-
 
 
 });

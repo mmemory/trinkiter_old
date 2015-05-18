@@ -15,7 +15,7 @@ app.config(function($routeProvider) {
             templateUrl: 'src/templates/registerHome.html',
             controller: 'registerControl'
         })
-        .when('/dashboard/:userId', {
+        .when('/dashboard', {
             templateUrl: 'src/templates/dashboard.html',
             controller: 'dashControl'
         })
