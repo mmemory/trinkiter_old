@@ -30,11 +30,9 @@
 
 	<!-- Begin Block -->
 	<section class="blocks">
-		<div class="block"
-				ng-repeat="block in blocks"
-				ng-show="block.userid !== user">
+		<div class="block" ng-repeat="block in blocks">
 			<div class="image-clip">
-				<img class="block-image" ng-src="{{block.imageurl}}" alt="{{block.title}}"/>
+				<img class="block-image" ng-src="{{block.image}}" alt="{{block.title}}"/>
 			</div>
 
 			<div class="text-wrapper">
@@ -45,12 +43,20 @@
 
 			<div class="icon-wrapper">
 				<p class="icon-check" ng-click="interested()"><i class="fa fa-check-circle-o"></i></p>
-				<p class="icon-trash" ng-click="notInterested()"><i class="fa fa-times-circle-o"></i></i></p>
+				<p class="icon-trash" ng-click="notInterested(block)"><i class="fa fa-times-circle-o"></i></i></p>
 			</div>
 		</div>
 
 	</section>
 	<!-- End Block -->
+
+
+	<!--TODO Create popup for block info-->
+	<!-- Begin Block Popup -->
+	<!--<section class="block-popup--wrapper animate-fade" ng-show="popupShown">-->
+		<!---->
+	<!--</section>-->
+	<!-- End Block Popup -->
 
 	<section class="dash-sidebar"></section>
 

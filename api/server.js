@@ -37,6 +37,7 @@ app.delete('/api/trinkets/:id', TrinketCtrl.remove);
 app.get('/api/users', UserCtrl.get);
 app.post('/api/users', UserCtrl.make);
 app.put('/api/users/:id', UserCtrl.update);
+app.put('/api/users/dislikes/:id', UserCtrl.updateDislikes);
 app.delete('/api/users/:id', UserCtrl.remove);
 
 

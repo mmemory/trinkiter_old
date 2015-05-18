@@ -10,6 +10,8 @@ module.exports = {
     },
 
     get: function(req, res) {
+
+
         Trinkets.find(req.query, function(err, result) {
             if (err) res.status(500).json(err);
             else res.json(result);
