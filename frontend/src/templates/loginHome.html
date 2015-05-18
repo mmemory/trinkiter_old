@@ -1,0 +1,21 @@
+<section class="wrapper-main--transparent">
+	<section class="wrapper-main--text">
+		<h1>Welcome to trinkiter!</h1>
+		<h2>Login below, or sign up <a href="#/register">here</a></h2>
+	</section>
+
+	<form class="form-main--form" ng-submit="login()">
+
+		<p ng-show="message">The password or username you provided is incorrect</p>
+
+		<input class="form-main--input form-main--text" type="email" placeholder="email"
+				ng-model="user.email"/> <br/>
+		<input class="form-main--input form-main--text" type="password" placeholder="password"
+				ng-model="user.password"/> <br/>
+
+		<button class="form-main--input form-main--button" type="submit">Login</button>
+		<!--<p>or <a href="#/register">register</a></p>-->
+
+		<p ng-show="newPass">{{newPass}} Click <a href="#/passwordreset">here</a> to reset it.</p>
+	</form>
+</section>
