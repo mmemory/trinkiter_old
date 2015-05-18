@@ -1,7 +1,8 @@
-var app = angular.module('trinkApp', ['ngRoute', 'firebase', 'ngAnimate']);
+var app = angular.module('trinkApp', ['ngRoute', 'ngAnimate']);
 
-app.constant('fb', {
-    url: 'https://trinkiter.firebaseio.com/'
+app.constant('CONSTANT', {
+    // API server
+    url: 'http://localhost:3000/api/'
 });
 
 app.config(function($routeProvider) {
@@ -18,18 +19,39 @@ app.config(function($routeProvider) {
             templateUrl: 'src/templates/dashboard.html',
             controller: 'dashControl'
         })
-        .
-        when('/passwordreset', {
-            templateUrl: 'src/templates/lostPassword.html',
-            controller: 'resetPassControl'
-        })
         .otherwise({
             redirectTo: '/login'
         })
 });
 var app = angular.module('trinkApp');
 
-app.service('MainService', function() {
+app.service('MainService', function($http, CONSTANT) {
+
+    var url = CONSTANT.url;
+
+    this.registerUser = function(email, firstName, lastName) {
+        var userUrl = url + 'users';
+
+        var userData = {
+            user_info: {
+                name: {
+                    first_name: firstName,
+                    last_name: lastName
+                },
+                email: email
+            }
+        };
+
+        //console.log(userData);
+
+        $http.post(userUrl, userData).success(function(data) {
+            console.log('success!');
+        }).error(function(data) {
+            console.log('error', data);
+        })
+    }
+
+
 
 
 });
@@ -54,7 +76,15 @@ app.controller('loginControl', function($scope) {
 });
 var app = angular.module('trinkApp');
 
-app.controller('registerControl', function($scope) {
+app.controller('registerControl', function($scope, MainService) {
+
+    $scope.user = {};
+
+    $scope.registerUser = function() {
+        MainService.registerUser($scope.user.email, $scope.user.firstname, $scope.user.lastname);
+
+
+    }
 
 
 });

@@ -2,7 +2,6 @@ var mongoose = require('mongoose');
 
 var userModel = new mongoose.Schema({
     user_info: {
-        username: {type: String, required: true},
         name: {
             first_name: {type: String, required: true},
             last_name: {type: String, required: true}

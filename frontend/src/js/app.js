@@ -1,7 +1,8 @@
-var app = angular.module('trinkApp', ['ngRoute', 'firebase', 'ngAnimate']);
+var app = angular.module('trinkApp', ['ngRoute', 'ngAnimate']);
 
-app.constant('fb', {
-    url: 'https://trinkiter.firebaseio.com/'
+app.constant('CONSTANT', {
+    // API server
+    url: 'http://localhost:3000/api/'
 });
 
 app.config(function($routeProvider) {
