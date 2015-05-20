@@ -5,8 +5,6 @@ var cors = require('cors');
 var mongoose = require('mongoose');
 var bodyParser = require('body-parser');
 var session = require('express-session');
-//var GoogleStrategy = require('passport-google').Strategy;
-//var passLocal = require('passport-local');
 var passport = require('passport');
 var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 
@@ -36,17 +34,27 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
+passport.serializeUser(function(user, done) {
+    done(null, user);
+});
+
+passport.deserializeUser(function(obj, done) {
+    //User.findById(id, function(err, user) {
+        done(null, obj);
+    //});
+});
+
 
 // Authentication
-passport.serializeUser(function(user, done) {
-    done(null, user.id);
-});
 
-passport.deserializeUser(function(id, done) {
-    User.findById(id, function(err, user) {
-        done(err, user);
-    });
-});
+//passport.use(new GoogleStrategy({
+//        clientID: configAuth.googleAuth.clientID,
+//        clientSecret: configAuth.googleAuth.clientSecret,
+//        callbackURL: "http://127.0.0.1:3000/auth/google/callback"
+//    },
+//    function(token, refreshToken, profile, done) {
+//        return done(null, profile);
+//    }));
 
 passport.use(new GoogleStrategy({
         clientID: configAuth.googleAuth.clientID,
@@ -56,13 +64,18 @@ passport.use(new GoogleStrategy({
     function(token, refreshToken, profile, done) {
         console.log(profile);
         process.nextTick(function() {
+            console.log('got into nextTick');
             User.findOne({'google.id': profile.id}, function(err, user) {
+
                 if (err) {
+                    console.log('error 1');
                     return done(err);
                 }
                 if (user) {
+                    console.log('error 2');
                     return done(null, user);
                 } else {
+                    console.log('got to else');
                     var newUser = new User();
 
                     newUser.google.id = profile.id;
@@ -98,14 +111,25 @@ app.put('/api/users/dislikes/:id', UserCtrl.updateDislikes);
 app.delete('/api/users/:id', UserCtrl.remove);
 
 //// User Auth
+//app.get('/auth/google', passport.authenticate('google', {
+//    scope: ['profile', 'email']
+//}));
+
 app.get('/auth/google', passport.authenticate('google', {
-    scope: ['profile', 'email']
+    scope: ['https://www.googleapis.com/auth/plus.login', 'email']
 }));
 
-app.get('/auth/google/callback', passport.authenticate('google', {failureRedirect: '#/login'}),
-    function(req, res) {
-        res.redirect('#/dashboard');
-    });
+//app.get('/auth/google/callback', passport.authenticate('google', {failureRedirect: '#/login'}),
+//    function(req, res) {
+//        res.redirect('#/dashboard');
+//    });
+
+app.get('/auth/google/callback', passport.authenticate('google', {
+        failureRedirect: '/#/login',
+        successRedirect: '/#/dashboard'
+    })
+);
+
 
 
 // Connections
