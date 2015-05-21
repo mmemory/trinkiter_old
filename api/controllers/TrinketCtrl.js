@@ -1,17 +1,34 @@
 var Trinkets = require('../models/trinketModel');
+var User = require('../models/userModel');
 
 module.exports = {
 
     make: function(req, res) {
+        //console.log('create req.user', req.user);
+        // TODO add reference to user that created trinket
         Trinkets.create(req.body, function(err, response) {
-            if (err) res.status(500).json(err);
-            else res.json(response);
+            //console.log('make trinket response TrinketCtrl.js', response);
+
+            User.findByIdAndUpdate(req.user._id, {$push: {user_trinkets: response._id}}, {new: true}, function(err, result) {
+                console.log('create', result);
+                if (err) res.status(500).json(err);
+                else res.json(result);
+            })
         })
     },
 
+    assignTrinketLike: function(req, res) {
+        Trinkets
+            .findByIdAndUpdate({_id: req.params.id}, {$push: {usersWhoLiked: req.user._id}})
+            .populate('usersWhoLiked')
+            .exec(function(err, result) {
+                console.log('result in trinketCtrl from like', result);
+                if (err) console.log('Error on assigning user ID to an object they liked', err);
+                res.status(200).json('liked result', result);
+            })
+    },
+
     get: function(req, res) {
-
-
         Trinkets.find(req.query, function(err, result) {
             if (err) res.status(500).json(err);
             else res.json(result);

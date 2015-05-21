@@ -9,9 +9,11 @@ var passport = require('passport');
 var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 
 
+
 // Config
 var port = process.env.PORT || 3000;
 var mongoUri = 'mongodb://localhost/trinkiter';
+
 
 
 // Local Imports
@@ -20,6 +22,7 @@ var TrinketCtrl = require('./controllers/TrinketCtrl');
 var UserCtrl = require('./controllers/UserCtrl');
 var configAuth = require('./config/auth');
 var User = require('./models/userModel');
+
 
 
 // Middleware
@@ -39,43 +42,31 @@ passport.serializeUser(function(user, done) {
 });
 
 passport.deserializeUser(function(obj, done) {
-    //User.findById(id, function(err, user) {
-        done(null, obj);
-    //});
+    done(null, obj);
 });
 
 
+
 // Authentication
-
-//passport.use(new GoogleStrategy({
-//        clientID: configAuth.googleAuth.clientID,
-//        clientSecret: configAuth.googleAuth.clientSecret,
-//        callbackURL: "http://127.0.0.1:3000/auth/google/callback"
-//    },
-//    function(token, refreshToken, profile, done) {
-//        return done(null, profile);
-//    }));
-
 passport.use(new GoogleStrategy({
         clientID: configAuth.googleAuth.clientID,
         clientSecret: configAuth.googleAuth.clientSecret,
-        callbackURL: "http://127.0.0.1:3000/auth/google/callback"
+        callbackURL: "http://localhost:3000/auth/google/callback"
     },
     function(token, refreshToken, profile, done) {
-        console.log(profile);
+        //console.log('profile', profile);
         process.nextTick(function() {
-            console.log('got into nextTick');
             User.findOne({'google.id': profile.id}, function(err, user) {
 
                 if (err) {
-                    console.log('error 1');
+                    console.log('error on user login');
                     return done(err);
                 }
                 if (user) {
-                    console.log('error 2');
+                    console.log('User exists already, let them pass!');
                     return done(null, user);
                 } else {
-                    console.log('got to else');
+                    console.log('created new user, and let them in.');
                     var newUser = new User();
 
                     newUser.google.id = profile.id;
@@ -85,7 +76,7 @@ passport.use(new GoogleStrategy({
 
                     newUser.save(function(err, result) {
                         if (err) {
-                            console.log(err);
+                            console.log('Save user Error (server.js:79)', err);
                         }
                         return done(null, result);
                     });
@@ -96,11 +87,13 @@ passport.use(new GoogleStrategy({
 ));
 
 
+
 // Endpoints
 /// Trinkets
 app.get('/api/trinkets', TrinketCtrl.get);
 app.post('/api/trinkets', TrinketCtrl.make);
 app.put('/api/trinkets/:id', TrinketCtrl.update);
+app.put('/api/trinkets/:id', TrinketCtrl.assignTrinketLike);
 app.delete('/api/trinkets/:id', TrinketCtrl.remove);
 
 /// Users
@@ -110,27 +103,36 @@ app.put('/api/users/:id', UserCtrl.update);
 app.put('/api/users/dislikes/:id', UserCtrl.updateDislikes);
 app.delete('/api/users/:id', UserCtrl.remove);
 
-//// User Auth
-//app.get('/auth/google', passport.authenticate('google', {
-//    scope: ['profile', 'email']
-//}));
-
+//// User Auth GOOGLE
 app.get('/auth/google', passport.authenticate('google', {
-    scope: ['https://www.googleapis.com/auth/plus.login', 'email']
+    scope: ['profile', 'email']
 }));
 
-//app.get('/auth/google/callback', passport.authenticate('google', {failureRedirect: '#/login'}),
-//    function(req, res) {
-//        res.redirect('#/dashboard');
-//    });
+//app.get('/auth/google', passport.authenticate('google', {
+//    scope: ['https://www.googleapis.com/auth/plus.login', 'email']
+//}));
 
-app.get('/auth/google/callback', passport.authenticate('google', {
-        failureRedirect: '/#/login',
-        successRedirect: '/#/dashboard'
-    })
+app.get('/auth/google/callback', passport.authenticate('google', {failureRedirect: '/#/login'}),
+    function(req, res) {
+        var userID = req.user.google.id;
+        // Serve url with userID for custom dashboard url
+        res.redirect('/#/dashboard/' + userID);
+    }
 );
 
+var userInfo;
+app.get('/auth/me', UserCtrl.getCurrentUser);
 
+
+
+app.get('/auth/logout', function(req, res) {
+    req.logout();
+    res.redirect('/#/login');
+});
+
+
+
+//++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 // Connections
 app.listen(port, function() {

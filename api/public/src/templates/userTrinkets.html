@@ -1,10 +1,10 @@
 <nav class="nav-dashboard">
 	<p class="icon-plus" ng-click='toggleModal()'><i class="fa fa-plus"></i></p>
 
-	<a href="#"><p class="icon-myDash"><i class="fa fa-bookmark"></i></p></a>
 	<a href="/auth/logout"><p class="icon-logout"><i class="fa fa-sign-out"></i></p></a>
 
 
+	<a href="/api/users"><p> my trinkets </p></a>
 
 	<h3 class="user-display-name" ng-show="userName">welcome, {{userName}}</h3>
 </nav>
@@ -47,7 +47,7 @@
 			</div>
 
 			<div class="icon-wrapper">
-				<p class="icon-check" ng-click="interested(block)"><i class="fa fa-check-circle-o"></i></p>
+				<p class="icon-check" ng-click="interested()"><i class="fa fa-check-circle-o"></i></p>
 				<p class="icon-trash" ng-click="notInterested(block)"><i class="fa fa-times-circle-o"></i></i></p>
 			</div>
 		</div>
@@ -59,7 +59,7 @@
 	<!--TODO Create popup for block info-->
 	<!-- Begin Block Popup -->
 	<!--<section class="block-popup--wrapper animate-fade" ng-show="popupShown">-->
-		<!---->
+	<!---->
 	<!--</section>-->
 	<!-- End Block Popup -->
 

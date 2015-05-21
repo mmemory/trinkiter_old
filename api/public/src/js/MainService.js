@@ -4,8 +4,9 @@ app.service('MainService', function($http, CONSTANT, $q) {
 
     // Globals
     var url = CONSTANT.url,
-        trinketUrl = url + 'trinkets',
-        userUrl = url + 'users';
+        trinketUrl = url + 'api/trinkets',
+        userUrl = url + 'api/users',
+        currentUserUrl = url + 'auth/me';
 
 
     ///////////////////////////////////////////
@@ -41,8 +42,9 @@ app.service('MainService', function($http, CONSTANT, $q) {
         var trinketData = {
             title: title,
             image: image,
-            description: description
+            description: description,
         };
+        //console.log('server created userID', userId);
 
         $http.post(trinketUrl, trinketData)
             .success(function(data) {
@@ -73,7 +75,48 @@ app.service('MainService', function($http, CONSTANT, $q) {
         return dfd.promise;
     };
 
+    /*
+     * Get logged in user info
+     */
+    this.getCurrentUser = function() {
+        var dfd = $q.defer();
+        $http.get(currentUserUrl)
+            .success(function(data) {
+                //console.log('user data from service', data);
+                dfd.resolve(data);
+            })
+            .error(function(data) {
+                console.log('Error', data);
+            });
+        return dfd.promise;
+    };
 
+    ///////////////////////////////////////////
+    //      UPDATE DATA TO DATABASE
+    /////////////////////////////////////////
+
+    /*
+     * Get logged in user info
+     */
+    this.sendALike = function(trinketId) {
+        var trincketIdUrl = trinketUrl + '/' + trinketId;
+
+        var sendId = {
+            _id: trinketId
+        };
+
+        var dfd = $q.defer();
+        $http.put(trincketIdUrl, sendId)
+            .success(function(data) {
+                console.log('data from like in service', data._id);
+                console.log('Successfully liked the trinket');
+                dfd.resolve(data._id);
+            })
+            .error(function(data) {
+                console.log('Failed to like the trinket', data);
+            });
+        return dfd.promise;
+    };
 
     ///////////////////////////////////////////
     //      DELETE DATA FROM DATABASE
@@ -82,6 +125,7 @@ app.service('MainService', function($http, CONSTANT, $q) {
     /*
      * Delete trinket from array of trinkets
      */
+    //TODO this needs to remove from user dashboard, not from database completely
     this.deleteTrinket = function(trinketId) {
         var trincketIdUrl = trinketUrl + '/' + trinketId;
 

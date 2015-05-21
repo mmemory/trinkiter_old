@@ -2,7 +2,7 @@ var app = angular.module('trinkApp', ['ngRoute', 'ngAnimate']);
 
 app.constant('CONSTANT', {
     // API server
-    url: 'http://localhost:3000/api/'
+    url: 'http://localhost:3000/'
 });
 
 app.config(function($routeProvider) {
@@ -11,14 +11,28 @@ app.config(function($routeProvider) {
             templateUrl: 'src/templates/loginHome.html',
             controller: 'loginControl'
         })
-        .when('/register', {
-            templateUrl: 'src/templates/registerHome.html',
-            controller: 'registerControl'
-        })
-        .when('/dashboard', {
+        //.when('/register', {
+        //    templateUrl: 'src/templates/registerHome.html',
+        //    controller: 'registerControl'
+        //})
+        .when('/dashboard/:id', {
             templateUrl: 'src/templates/dashboard.html',
-            controller: 'dashControl'
+            controller: 'dashControl',
+            resolve: {
+                getUser: function(MainService, $route) {
+                    return MainService.getCurrentUser($route.current.params.id);
+                }
+            }
         })
+        //.when('/dashboard/mytrinkets/:id', {
+        //    templateUrl: 'src/templates/userTrinkets.html',
+        //    controller: 'userTrinketsControl',
+        //    resolve: {
+        //        getTrinkets: function(MainService, $route) {
+        //            return MainService.getCurrentUserTrinkets($route.current.params.id);
+        //        }
+        //    }
+        //})
         .otherwise({
             redirectTo: '/login'
         })
@@ -29,8 +43,9 @@ app.service('MainService', function($http, CONSTANT, $q) {
 
     // Globals
     var url = CONSTANT.url,
-        trinketUrl = url + 'trinkets',
-        userUrl = url + 'users';
+        trinketUrl = url + 'api/trinkets',
+        userUrl = url + 'api/users',
+        currentUserUrl = url + 'auth/me';
 
 
     ///////////////////////////////////////////
@@ -66,8 +81,9 @@ app.service('MainService', function($http, CONSTANT, $q) {
         var trinketData = {
             title: title,
             image: image,
-            description: description
+            description: description,
         };
+        //console.log('server created userID', userId);
 
         $http.post(trinketUrl, trinketData)
             .success(function(data) {
@@ -98,7 +114,48 @@ app.service('MainService', function($http, CONSTANT, $q) {
         return dfd.promise;
     };
 
+    /*
+     * Get logged in user info
+     */
+    this.getCurrentUser = function() {
+        var dfd = $q.defer();
+        $http.get(currentUserUrl)
+            .success(function(data) {
+                //console.log('user data from service', data);
+                dfd.resolve(data);
+            })
+            .error(function(data) {
+                console.log('Error', data);
+            });
+        return dfd.promise;
+    };
 
+    ///////////////////////////////////////////
+    //      UPDATE DATA TO DATABASE
+    /////////////////////////////////////////
+
+    /*
+     * Get logged in user info
+     */
+    this.sendALike = function(trinketId) {
+        var trincketIdUrl = trinketUrl + '/' + trinketId;
+
+        var sendId = {
+            _id: trinketId
+        };
+
+        var dfd = $q.defer();
+        $http.put(trincketIdUrl, sendId)
+            .success(function(data) {
+                console.log('data from like in service', data._id);
+                console.log('Successfully liked the trinket');
+                dfd.resolve(data._id);
+            })
+            .error(function(data) {
+                console.log('Failed to like the trinket', data);
+            });
+        return dfd.promise;
+    };
 
     ///////////////////////////////////////////
     //      DELETE DATA FROM DATABASE
@@ -107,6 +164,7 @@ app.service('MainService', function($http, CONSTANT, $q) {
     /*
      * Delete trinket from array of trinkets
      */
+    //TODO this needs to remove from user dashboard, not from database completely
     this.deleteTrinket = function(trinketId) {
         var trincketIdUrl = trinketUrl + '/' + trinketId;
 
@@ -154,7 +212,7 @@ app.controller('dashControl', function($scope, MainService) {
 
     $scope.submitNewBlock = function() {
         displayTrinkets();
-        MainService.createTrinket($scope.block.title, $scope.block.imageurl, $scope.block.description, $scope.user);
+        MainService.createTrinket($scope.block.title, $scope.block.imageurl, $scope.block.description);
 
         setNewBlockFieldsBlank();
         $scope.modalShown = false;
@@ -164,7 +222,6 @@ app.controller('dashControl', function($scope, MainService) {
     $scope.modalShown = false;
     $scope.toggleModal = function() {
         $scope.modalShown = !$scope.modalShown;
-        setNewBlockFieldsBlank()
     };
 
     $scope.popupShown = false;
@@ -177,13 +234,13 @@ app.controller('dashControl', function($scope, MainService) {
         MainService.getTrinketList()
             .then(function(data) {
                 $scope.blocks = data;
-                console.log(data);
+                //console.log('trinket list:', data);
             });
     };
     displayTrinkets();
 
     $scope.notInterested = function(block) {
-        console.log('block', block);
+        //console.log('block', block);
         var index = $scope.blocks.indexOf(block);
 
         var blockId = block._id;
@@ -191,7 +248,24 @@ app.controller('dashControl', function($scope, MainService) {
             .then(function(data) {
                 $scope.blocks.splice(index, 1);
             })
-    }
+    };
+
+    $scope.interested = function(block) {
+        var blockId = block._id;
+        console.log('liked block ID', blockId);
+        MainService.sendALike(blockId);
+    };
+
+    var getCurrentUser = function() {
+        MainService.getCurrentUser()
+            .then(function(user) {
+                console.log('Current user is on $scope (dashControl.js)', user);
+                $scope.userName = user.name;
+                $scope.userEmail = user.email;
+            })
+    };
+    getCurrentUser();
+
 });
 var app = angular.module('trinkApp');
 
@@ -229,4 +303,65 @@ var app = angular.module('trinkApp');
 app.controller('resetPassControl', function($scope) {
 
 
+});
+var app = angular.module('trinkApp');
+
+app.controller('userTrinketsControl', function($scope, MainService) {
+
+    // Empties the input fields for the 'new item' modal popup
+    var setNewBlockFieldsBlank = function() {
+        $scope.block.imageurl = '';
+        $scope.block.title = '';
+        $scope.block.description = '';
+    };
+
+    $scope.submitNewBlock = function() {
+        displayTrinkets();
+        MainService.createTrinket($scope.block.title, $scope.block.imageurl, $scope.block.description);
+
+        setNewBlockFieldsBlank();
+        $scope.modalShown = false;
+    };
+
+    // Toggles 'new item' modal popup
+    $scope.modalShown = false;
+    $scope.toggleModal = function() {
+        $scope.modalShown = !$scope.modalShown;
+    };
+
+    $scope.popupShown = false;
+    $scope.togglePopup = function() {
+        $scope.popupShown = !$scope.popupShown;
+        setNewBlockFieldsBlank()
+    };
+
+    var displayTrinkets = function() {
+        MainService.getTrinketList()
+            .then(function(data) {
+                $scope.blocks = data;
+                //console.log('trinket list:', data);
+            });
+    };
+    displayTrinkets();
+
+    $scope.notInterested = function(block) {
+        console.log('block', block);
+        var index = $scope.blocks.indexOf(block);
+
+        var blockId = block._id;
+        MainService.deleteTrinket(blockId)
+            .then(function(data) {
+                $scope.blocks.splice(index, 1);
+            })
+    };
+
+    var getCurrentUser = function() {
+        MainService.getCurrentUser()
+            .then(function(user) {
+                console.log('current user', user);
+                $scope.userName = user.name;
+                $scope.userEmail = user.email;
+            })
+    };
+    getCurrentUser();
 });

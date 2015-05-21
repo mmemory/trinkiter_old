@@ -1,6 +1,6 @@
 var app = angular.module('trinkApp');
 
-app.controller('dashControl', function($scope, MainService) {
+app.controller('userTrinketsControl', function($scope, MainService) {
 
     // Empties the input fields for the 'new item' modal popup
     var setNewBlockFieldsBlank = function() {
@@ -39,7 +39,7 @@ app.controller('dashControl', function($scope, MainService) {
     displayTrinkets();
 
     $scope.notInterested = function(block) {
-        //console.log('block', block);
+        console.log('block', block);
         var index = $scope.blocks.indexOf(block);
 
         var blockId = block._id;
@@ -49,20 +49,13 @@ app.controller('dashControl', function($scope, MainService) {
             })
     };
 
-    $scope.interested = function(block) {
-        var blockId = block._id;
-        console.log('liked block ID', blockId);
-        MainService.sendALike(blockId);
-    };
-
     var getCurrentUser = function() {
         MainService.getCurrentUser()
             .then(function(user) {
-                console.log('Current user is on $scope (dashControl.js)', user);
+                console.log('current user', user);
                 $scope.userName = user.name;
                 $scope.userEmail = user.email;
             })
     };
     getCurrentUser();
-
 });

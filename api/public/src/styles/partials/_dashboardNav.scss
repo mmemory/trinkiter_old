@@ -8,6 +8,15 @@
   position: fixed;
   top: 75px;
 
+  .user-display-name {
+    float: right;
+    margin: 0 30px 0 0;
+    display: inline-block;
+    font-size: 15px;
+    color: #ffffff;
+    letter-spacing: 1px;
+  }
+
   p {
     display: inline;
     color: #ffffff;
@@ -40,6 +49,17 @@
 
     &:after {
       content: 'logout';
+      position: relative;
+      left: 5px;
+    }
+  }
+
+  .icon-myDash {
+    color: #ffffff;
+    margin: 0 0 0 20px;
+
+    &:after {
+      content: 'my items';
       position: relative;
       left: 5px;
     }

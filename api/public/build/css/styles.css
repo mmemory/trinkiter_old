@@ -228,18 +228,18 @@ a:hover {
 .form-main--form .form-main--button {
   border: none;
   cursor: pointer;
-  background-color: #0b94d3;
+  background-color: #dd4b39;
   color: #ffffff;
   font-weight: 100;
   transition: .2s;
 }
-/* line 76, ../../src/styles/partials/_mainForm.scss */
+/* line 77, ../../src/styles/partials/_mainForm.scss */
 .form-main--form .form-main--button:hover {
   background-color: #0ca5eb;
   transition: .3s;
 }
 
-/* line 83, ../../src/styles/partials/_mainForm.scss */
+/* line 84, ../../src/styles/partials/_mainForm.scss */
 .form-register {
   margin-top: -30px;
 }
@@ -364,39 +364,59 @@ a:hover {
   top: 75px;
 }
 /* line 11, ../../src/styles/partials/_dashboardNav.scss */
+.nav-dashboard .user-display-name {
+  float: right;
+  margin: 0 30px 0 0;
+  display: inline-block;
+  font-size: 15px;
+  color: #ffffff;
+  letter-spacing: 1px;
+}
+/* line 20, ../../src/styles/partials/_dashboardNav.scss */
 .nav-dashboard p {
   display: inline;
   color: #ffffff;
   cursor: pointer;
 }
-/* line 16, ../../src/styles/partials/_dashboardNav.scss */
+/* line 25, ../../src/styles/partials/_dashboardNav.scss */
 .nav-dashboard p a {
   color: #ffffff;
 }
-/* line 20, ../../src/styles/partials/_dashboardNav.scss */
+/* line 29, ../../src/styles/partials/_dashboardNav.scss */
 .nav-dashboard p:hover, .nav-dashboard p a:hover {
   color: #0b94d3;
 }
-/* line 25, ../../src/styles/partials/_dashboardNav.scss */
+/* line 34, ../../src/styles/partials/_dashboardNav.scss */
 .nav-dashboard .icon-plus {
   margin: 0 0 0 20px;
   color: #ffffff;
 }
-/* line 29, ../../src/styles/partials/_dashboardNav.scss */
+/* line 38, ../../src/styles/partials/_dashboardNav.scss */
 .nav-dashboard .icon-plus:after {
   content: 'new item';
   position: relative;
   left: 5px;
   bottom: 1px;
 }
-/* line 37, ../../src/styles/partials/_dashboardNav.scss */
+/* line 46, ../../src/styles/partials/_dashboardNav.scss */
 .nav-dashboard .icon-logout {
   color: #ffffff;
   margin: 0 0 0 20px;
 }
-/* line 41, ../../src/styles/partials/_dashboardNav.scss */
+/* line 50, ../../src/styles/partials/_dashboardNav.scss */
 .nav-dashboard .icon-logout:after {
   content: 'logout';
+  position: relative;
+  left: 5px;
+}
+/* line 57, ../../src/styles/partials/_dashboardNav.scss */
+.nav-dashboard .icon-myDash {
+  color: #ffffff;
+  margin: 0 0 0 20px;
+}
+/* line 61, ../../src/styles/partials/_dashboardNav.scss */
+.nav-dashboard .icon-myDash:after {
+  content: 'my items';
   position: relative;
   left: 5px;
 }
