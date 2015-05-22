@@ -96,17 +96,13 @@ app.service('MainService', function($http, CONSTANT, $q) {
     /////////////////////////////////////////
 
     /*
-     * Get logged in user info
+     * Send trinket ID to assign user ID to likes object
      */
     this.sendALike = function(trinketId) {
         var trincketIdUrl = trinketUrl + '/' + trinketId;
 
-        var sendId = {
-            _id: trinketId
-        };
-
         var dfd = $q.defer();
-        $http.put(trincketIdUrl, sendId)
+        $http.post(trincketIdUrl)
             .success(function(data) {
                 console.log('data from like in service', data._id);
                 console.log('Successfully liked the trinket');
@@ -114,6 +110,25 @@ app.service('MainService', function($http, CONSTANT, $q) {
             })
             .error(function(data) {
                 console.log('Failed to like the trinket', data);
+            });
+        return dfd.promise;
+    };
+
+    /*
+     * Send trinket ID to assign user ID to dislikes object
+     */
+    this.sendAHate = function(trinketId) {
+        var trincketIdUrl = trinketUrl + '/hate/' + trinketId;
+
+        var dfd = $q.defer();
+        $http.post(trincketIdUrl)
+            .success(function(data) {
+                console.log('data from hate in service', data._id);
+                console.log('Successfully hated the trinket');
+                dfd.resolve(data._id);
+            })
+            .error(function(data) {
+                console.log('Failed to hate the trinket', data);
             });
         return dfd.promise;
     };

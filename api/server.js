@@ -93,7 +93,8 @@ passport.use(new GoogleStrategy({
 app.get('/api/trinkets', TrinketCtrl.get);
 app.post('/api/trinkets', TrinketCtrl.make);
 app.put('/api/trinkets/:id', TrinketCtrl.update);
-app.put('/api/trinkets/:id', TrinketCtrl.assignTrinketLike);
+app.post('/api/trinkets/:id', TrinketCtrl.assignTrinketLike);
+app.post('/api/trinkets/hate/:id', TrinketCtrl.assignTrinketHate);
 app.delete('/api/trinkets/:id', TrinketCtrl.remove);
 
 /// Users
@@ -112,7 +113,7 @@ app.get('/auth/google', passport.authenticate('google', {
 //    scope: ['https://www.googleapis.com/auth/plus.login', 'email']
 //}));
 
-app.get('/auth/google/callback', passport.authenticate('google', {failureRedirect: '/#/login'}),
+app.get('/auth/google/callback', passport.authenticate('google', {failureRedirect: '/login'}),
     function(req, res) {
         var userID = req.user.google.id;
         // Serve url with userID for custom dashboard url

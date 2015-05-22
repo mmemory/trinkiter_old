@@ -38,22 +38,30 @@ app.controller('dashControl', function($scope, MainService) {
     };
     displayTrinkets();
 
+    // DISLIKE BUTTON
     $scope.notInterested = function(block) {
-        //console.log('block', block);
-        var index = $scope.blocks.indexOf(block);
-
         var blockId = block._id;
-        MainService.deleteTrinket(blockId)
-            .then(function(data) {
-                $scope.blocks.splice(index, 1);
-            })
+        console.log('disliked block ID', blockId);
+        MainService.sendAHate(blockId);
     };
 
+    // LIKE BUTTON
     $scope.interested = function(block) {
         var blockId = block._id;
         console.log('liked block ID', blockId);
         MainService.sendALike(blockId);
     };
+
+    //$scope.notInterested = function(block) {
+    //    //console.log('block', block);
+    //    var index = $scope.blocks.indexOf(block);
+    //
+    //    var blockId = block._id;
+    //    MainService.deleteTrinket(blockId)
+    //        .then(function(data) {
+    //            $scope.blocks.splice(index, 1);
+    //        })
+    //};
 
     var getCurrentUser = function() {
         MainService.getCurrentUser()
