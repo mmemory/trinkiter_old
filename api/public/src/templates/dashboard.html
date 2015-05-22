@@ -1,7 +1,9 @@
+<!--TODO make dashboard nav into a directive-->
 <nav class="nav-dashboard">
 	<p class="icon-plus" ng-click='toggleModal()'><i class="fa fa-plus"></i></p>
 
-	<a href="#"><p class="icon-myDash"><i class="fa fa-bookmark"></i></p></a>
+	<a ui-sref="dashboard.all-items"><p class="icon-everythingDash"><i class="fa fa-users"></i></i></p></a>
+	<a ui-sref="dashboard.my-items"><p class="icon-myDash"><i class="fa fa-user"></i></i></p></a>
 	<a href="/auth/logout"><p class="icon-logout"><i class="fa fa-sign-out"></i></p></a>
 
 
@@ -31,38 +33,7 @@
 </section><!-- End Modal Window -->
 
 <!-- Begin Dashboard Content -->
-<section class="wrapper-dashboard">
-
-	<!-- Begin Block -->
-	<section class="blocks">
-		<div class="block" ng-repeat="block in blocks">
-			<div class="image-clip">
-				<img class="block-image" ng-src="{{block.image}}" alt="{{block.title}}"/>
-			</div>
-
-			<div class="text-wrapper">
-				<h3 class="block-title">{{block.title}}</h3>
-
-				<p class="block-description">{{block.description}}</p>
-			</div>
-
-			<div class="icon-wrapper">
-				<p class="icon-check" ng-click="interested(block)"><i class="fa fa-check-circle-o"></i></p>
-				<p class="icon-trash" ng-click="notInterested(block)"><i class="fa fa-times-circle-o"></i></i></p>
-			</div>
-		</div>
-
-	</section>
-	<!-- End Block -->
-
-
-	<!--TODO Create popup for block info-->
-	<!-- Begin Block Popup -->
-	<!--<section class="block-popup--wrapper animate-fade" ng-show="popupShown">-->
-	<!--</section>-->
-	<!-- End Block Popup -->
-
-	<section class="dash-sidebar"></section>
-
+<section class="wrapper-dashboard" ui-view>
 </section><!-- End Dashboard Content -->
+<section class="dash-sidebar"></section>
 

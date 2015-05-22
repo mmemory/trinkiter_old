@@ -420,3 +420,14 @@ a:hover {
   position: relative;
   left: 5px;
 }
+/* line 68, ../../src/styles/partials/_dashboardNav.scss */
+.nav-dashboard .icon-everythingDash {
+  color: #ffffff;
+  margin: 0 0 0 20px;
+}
+/* line 72, ../../src/styles/partials/_dashboardNav.scss */
+.nav-dashboard .icon-everythingDash:after {
+  content: 'dashboard';
+  position: relative;
+  left: 5px;
+}

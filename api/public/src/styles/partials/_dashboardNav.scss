@@ -64,4 +64,15 @@
       left: 5px;
     }
   }
+
+  .icon-everythingDash {
+    color: #ffffff;
+    margin: 0 0 0 20px;
+
+    &:after {
+      content: 'dashboard';
+      position: relative;
+      left: 5px;
+    }
+  }
 }

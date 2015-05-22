@@ -1,0 +1,21 @@
+<!-- Begin Block -->
+<section class="blocks">
+	<div class="block" ng-repeat="block in blocks">
+		<div class="image-clip">
+			<img class="block-image" ng-src="{{block.image}}" alt="{{block.title}}"/>
+		</div>
+
+		<div class="text-wrapper">
+			<h3 class="block-title">{{block.title}}</h3>
+
+			<p class="block-description">{{block.description}}</p>
+		</div>
+
+		<div class="icon-wrapper">
+			<p class="icon-check" ng-click="interested(block)"><i class="fa fa-check-circle-o"></i></p>
+			<p class="icon-trash" ng-click="notInterested(block)"><i class="fa fa-times-circle-o"></i></i></p>
+		</div>
+	</div>
+
+</section>
+<!-- End Block -->

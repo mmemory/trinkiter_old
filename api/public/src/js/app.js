@@ -14,6 +14,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
             controller: 'loginControl'
         })
         .state('dashboard', {
+            abstract: true,
             url: '/dashboard/:id',
             templateUrl: 'src/templates/dashboard.html',
             controller: 'dashControl',
@@ -23,9 +24,14 @@ app.config(function($stateProvider, $urlRouterProvider) {
                 }
             }
         })
+        .state('dashboard.all-items', {
+            url: '/everything',
+            templateUrl: 'src/templates/allTrinkets.html',
+            controller: 'dashControl'
+        })
         .state('dashboard.my-items', {
             url: '/mytrinkets',
-            templateUrl: 'src/templates/my-items.html',
+            templateUrl: 'src/templates/userTrinkets.html',
             controller: 'dashControl'
         });
 
