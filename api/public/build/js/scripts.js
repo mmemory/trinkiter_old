@@ -25,7 +25,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
             }
         })
         .state('dashboard.all-items', {
-            url: '/everything',
+            url: '/trinkets',
             templateUrl: 'src/templates/allTrinkets.html',
             controller: 'dashControl'
         })
@@ -225,6 +225,7 @@ app.controller('dashControl', function($scope, MainService) {
         $scope.block.description = '';
     };
 
+    // Create a new trinket
     $scope.submitNewBlock = function() {
         displayTrinkets();
         MainService.createTrinket($scope.block.title, $scope.block.imageurl, $scope.block.description);
@@ -245,6 +246,7 @@ app.controller('dashControl', function($scope, MainService) {
         setNewBlockFieldsBlank()
     };
 
+    // Displays all trinkets on dashboard load
     var displayTrinkets = function() {
         MainService.getTrinketList()
             .then(function(data) {
@@ -268,23 +270,24 @@ app.controller('dashControl', function($scope, MainService) {
         MainService.sendALike(blockId);
     };
 
-    //$scope.notInterested = function(block) {
-    //    //console.log('block', block);
-    //    var index = $scope.blocks.indexOf(block);
-    //
-    //    var blockId = block._id;
-    //    MainService.deleteTrinket(blockId)
-    //        .then(function(data) {
-    //            $scope.blocks.splice(index, 1);
-    //        })
-    //};
+    $scope.deleteTrinket = function(trinket) {
+        console.log('block', trinket);
+        var index = $scope.userTrinkets.indexOf(trinket);
+
+        var blockId = trinket._id;
+        MainService.deleteTrinket(blockId)
+            .then(function(data) {
+                $scope.userTrinkets.splice(index, 1);
+            })
+    };
 
     var getCurrentUser = function() {
         MainService.getCurrentUser()
             .then(function(user) {
-                console.log('Current user is on $scope (dashControl.js)', user);
+                //console.log('Current user is on $scope (dashControl.js)', user);
                 $scope.userName = user.name;
                 $scope.userEmail = user.email;
+                $scope.userTrinkets = user.trinkets;
             })
     };
     getCurrentUser();

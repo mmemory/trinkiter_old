@@ -1,6 +1,7 @@
 
 // Compass Imports
-@import "../../../../../../../.rvm/gems/ruby-2.2.1/gems/compass-core-1.0.3/stylesheets/compass";
+//@import "../../../../../../../.rvm/gems/ruby-2.2.1/gems/compass-core-1.0.3/stylesheets/compass";
+@import "compass";
 @import "breakpoint";
 @import "singularitygs";
 
@@ -18,3 +19,5 @@
 @import "partials/modal";
 @import "partials/dashboard";
 @import "partials/dashboardNav";
+@import "partials/userTrinkets";
+@import "partials/dashSidebar";

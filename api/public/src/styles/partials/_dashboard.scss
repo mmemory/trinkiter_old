@@ -3,3 +3,20 @@
   height: 100%;
   margin-top: 100px;
 }
+
+.view-header {
+  font-size: 2rem;
+  color: $component-color;
+  font-weight: 200;
+  margin-left: 20px;
+  margin-bottom: 10px;
+  display: inline-block;
+}
+
+.view-description {
+  display: inline-block;
+  margin-left: 10px;
+  margin-top: 0;
+  color: lighten($body-color, 20%);
+  font-size: 15px;
+}

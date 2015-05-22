@@ -1,1 +1,12 @@
-This is the user trinkets page
+<h1 class="view-header">my trinkets</h1>
+<p class="view-description">Here is a list of all the trinkets you've posted. You can edit or delete them.</p>
+<section class="trinkets-container">
+	<section class="trinket" ng-repeat="trinket in userTrinkets">
+		<p>{{trinket.title}}: </p>
+		<p>{{trinket.description}}</p>
+		<section class="trinket-controls">
+			<p class="icon-trash" ng-click="deleteTrinket(trinket)"><i class="fa fa-trash-o"></i></p>
+			<p class="icon-edit" ng-click="deleteTrinket(trinket)"><i class="fa fa-pencil-square-o"></i></p>
+		</section>
+	</section>
+</section>

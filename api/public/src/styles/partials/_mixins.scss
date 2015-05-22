@@ -1,0 +1,11 @@
+@mixin animation() {
+  -webkit-animation-duration: 1s;
+  animation-duration: 1s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+
+@mixin effect($effect) {
+  -webkit-animation-name: $effect;
+  animation-name: $effect;
+}

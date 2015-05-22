@@ -25,7 +25,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
             }
         })
         .state('dashboard.all-items', {
-            url: '/everything',
+            url: '/trinkets',
             templateUrl: 'src/templates/allTrinkets.html',
             controller: 'dashControl'
         })

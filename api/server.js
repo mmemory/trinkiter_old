@@ -117,7 +117,7 @@ app.get('/auth/google/callback', passport.authenticate('google', {failureRedirec
     function(req, res) {
         var userID = req.user.google.id;
         // Serve url with userID for custom dashboard url
-        res.redirect('/#/dashboard/' + userID + '/everything');
+        res.redirect('/#/dashboard/' + userID + '/trinkets');
     }
 );
 
