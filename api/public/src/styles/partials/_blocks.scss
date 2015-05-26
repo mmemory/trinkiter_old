@@ -14,13 +14,10 @@
     border: solid 1px $component-color;
     border-radius: 5px;
     height: 420px;
+    min-width: 275px;
+    max-width: 300px;
     margin: 10px;
     background: url('../../src/styles/assets/crossword.png');
-
-//    &:hover > .image-clip {
-//        height: 200px;
-//        transition: .2s;
-//      }
 
     .image-clip {
       width: 100%;

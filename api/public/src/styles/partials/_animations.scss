@@ -11,18 +11,79 @@
 
 // FADE IN & OUT
 @-webkit-keyframes fadeOut {
-  from {opacity: 1;}
-  to {opacity: 0;}
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
 }
+
 @keyframes fadeOut {
-  from {opacity: 1;}
-  to {opacity: 0;}
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
 }
+
 @-webkit-keyframes fadeIn {
-  from {opacity: 0;}
-  to {opacity: 1;}
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
+
 @keyframes fadeIn {
-  from {opacity: 0;}
-  to {opacity: 1;}
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
+
+//.dash-animate {
+//  -webkit-transition: all 2s ease;
+//  -moz-transition: all 2s ease;
+//  -o-transition: all 2s ease;
+//  transition: all 2s ease;
+//
+//  &.ng-enter {
+//    .trinkets-container {
+//      @include effect(slideInLeft);
+//    }
+//  }
+//
+//  &.ng-leave {
+//    .trinkets-container {
+//      @include effect(slideOutRight);
+//    }
+//  }
+//
+//  &.ng-enter {
+//    .blocks {
+//      @include effect(slideInLeft);
+//    }
+//  }
+//
+//  &.ng-leave {
+//    .blocks {
+//      @include effect(slideOutRight);
+//    }
+//  }
+//}
+
+//.wrapper-dashboard.ng-enter {
+//  -webkit-animation-name: slideInLeft;
+//  animation-name: slideInLeft;
+//}
+//
+//.wrapper-dashboard.ng-leave {
+//  -webkit-animation-name: slideOutRight;
+//  animation-name: slideOutRight;
+//
+//}

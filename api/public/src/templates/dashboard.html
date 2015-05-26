@@ -1,14 +1,15 @@
 <!--TODO make dashboard nav into a directive-->
 <nav class="nav-dashboard">
-	<p class="icon-plus" ng-click='toggleModal()'><i class="fa fa-plus"></i></p>
-
 	<a ui-sref="dashboard.all-items"><p class="icon-everythingDash"><i class="fa fa-users"></i></i></p></a>
 	<a ui-sref="dashboard.my-items"><p class="icon-myDash"><i class="fa fa-user"></i></i></p></a>
+	<p class="icon-plus" ng-click='toggleModal()'><i class="fa fa-plus"></i></p>
+
+
 	<a href="/auth/logout"><p class="icon-logout"><i class="fa fa-sign-out"></i></p></a>
 
 
 
-	<h3 class="user-display-name" ng-show="userName">welcome, {{userName}}</h3>
+	<h3 class="user-display-name" ng-show="userName">welcome, {{userName}} ({{userEmail}})</h3>
 </nav>
 
 <!--TODO fix X-icon responsiveness-->

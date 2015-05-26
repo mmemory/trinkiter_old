@@ -36,6 +36,7 @@ module.exports = {
             });
     },
 
+
     // TODO make it so the user moves reference of block to dislikes
     updateDislikes: function(req, res) {
         Users.findByIdAndUpdate(req.params.id, {$push: {}}, function(err, result) {
