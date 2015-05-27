@@ -53,28 +53,6 @@ app.service('MainService', function($http, CONSTANT, $q) {
     /////////////////////////////////////////
 
     /*
-     * Register User
-     */
-    this.registerUser = function(email, firstName, lastName) {
-        var userData = {
-            user_info: {
-                name: {
-                    first_name: firstName,
-                    last_name: lastName
-                },
-                email: email
-            }
-        };
-        $http.post(userUrl, userData)
-            .success(function(data) {
-                console.log('user info sent to mongodb');
-            })
-            .error(function(data) {
-                console.log('Error', data);
-            })
-    };
-
-    /*
      * Add new Trinkit
      */
     this.createTrinket = function(title, image, description) {
@@ -208,7 +186,12 @@ app.service('MainService', function($http, CONSTANT, $q) {
                 console.log('Error', data);
             });
         return dfd.promise;
-    }
+
+    };
+
+    //this.deleteMatch = function(matchId) {
+    //    var matchIdUrl = matchId +
+    //}
 
 });
 
@@ -216,7 +199,7 @@ app.service('MainService', function($http, CONSTANT, $q) {
 
 var app = angular.module('trinkApp');
 
-app.controller('dashControl', function($scope, MainService) {
+app.controller('dashControl', function($scope, MainService, getUser) {
 
     // Empties the input fields for the 'new item' modal popup
     var setNewBlockFieldsBlank = function() {
@@ -281,16 +264,34 @@ app.controller('dashControl', function($scope, MainService) {
             })
     };
 
-    var getCurrentUser = function() {
-        MainService.getCurrentUser()
-            .then(function(user) {
-                //console.log('Current user is on $scope (dashControl.js)', user);
-                $scope.userName = user.name;
-                $scope.userEmail = user.email;
-                $scope.userTrinkets = user.trinkets;
+    $scope.userName = getUser.name;
+    $scope.userEmail = getUser.email;
+    $scope.userTrinkets = getUser.trinkets;
+    $scope.matches = getUser.matches;
+
+    //var getCurrentUser = function() {
+    //    console.log('DASH CONTROL GET USER CALLED');
+    //    MainService.getCurrentUser()
+    //        .then(function(user) {
+    //            console.log('Current user is on $scope (dashControl.js)', user);
+    //            $scope.userName = user.name;
+    //            $scope.userEmail = user.email;
+    //            $scope.userTrinkets = user.trinkets;
+    //            $scope.matches = user.matches;
+    //            console.log('matches from controller', $scope.matches);
+    //        })
+    //};
+    //getCurrentUser();
+
+    $scope.deleteMatch = function(match) {
+        var index = $scope.matches.indexOf(match);
+
+        var matchId = match._id;
+        MainService.deleteMatch()
+            .then(function(result) {
+                $scope.matches.splice(index, 1)
             })
-    };
-    getCurrentUser();
+    }
 
 });
 var app = angular.module('trinkApp');
@@ -323,4 +324,14 @@ app.controller('registerControl', function($scope, MainService, $location) {
     }
 
 
+});
+$(document).ready(function() {
+    //console.log('prevent scroll fired');
+    var counter = 0;
+
+    $('.dash-sidebar').hover(function() {
+        //$('body').toggleClass('prevent-scroll');
+        counter++;
+        //console.log(counter);
+    })
 });

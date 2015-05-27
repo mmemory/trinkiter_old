@@ -26,22 +26,23 @@
       position: relative;
       right: 0;
       border-left: solid 1px $body-color;
-
-      .icon-trash {
-        cursor: pointer;
-
-        &:hover {
-          color: red;
-        } // hover
-      } // icon-trash
-
-      .icon-edit {
-        cursor: pointer;
-
-        &:hover {
-          color: $component-color;
-        }
-      }
     } // trinket controls
   } // trinket
 } //
+
+.icon-trash {
+  cursor: pointer;
+
+  &:hover {
+    color: red;
+  } // hover
+} // icon-trash
+
+.icon-edit {
+  cursor: pointer;
+
+  &:hover {
+    color: $component-color;
+  }
+}
+

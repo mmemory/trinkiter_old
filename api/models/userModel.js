@@ -1,4 +1,5 @@
 var mongoose = require('mongoose');
+var trinketModel = require('./trinketModel');
 
 var userModel = new mongoose.Schema({
     google: {

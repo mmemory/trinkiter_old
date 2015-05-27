@@ -36,5 +36,18 @@
 <!-- Begin Dashboard Content -->
 <section class="wrapper-dashboard" ui-view>
 </section><!-- End Dashboard Content -->
-<section class="dash-sidebar"></section>
+<section class="dash-sidebar">
+	<section class="match-header-wrapper"><h2 class="view-header match">your matches</h2></section>
+	<section class="match-component" ng-repeat="match in matches">
+		<p class="match-header">you matched with:</p>
+		<p>{{match.userWhoLikedYourTrinket.google.email}}</p>
+		<p ng-show="match.yourTrinketTheyLiked.title"><span class="match-header">they liked:</span> {{match.yourTrinketTheyLiked.title}}</p>
+		<p ng-hide="match.yourTrinketTheyLiked.title"><span class="match-header">they liked:</span> <span class="item-match-warning">REMOVED BY USER</span></p>
+		<p ng-show="match.theirTrinketYouLiked.title"><span class="match-header">you liked:</span> {{match.theirTrinketYouLiked.title}}</p>
+		<p ng-hide="match.theirTrinketYouLiked.title"><span class="match-header">you liked:</span> <span class="item-match-warning">REMOVED BY USER</span></p>
+
+		<p ng-click="deleteMatch(match)"><i class="fa fa-trash-o icon-trash"></i></p>
+	</section>
+
+</section>
 

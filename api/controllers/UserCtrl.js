@@ -12,10 +12,16 @@ module.exports = {
     get: function(req, res) {
         console.log('ran get user');
         Users
-            .findOne({_id: req.user._id})
+            .find()
             .populate('user_trinkets')
-            .exec(function(users) {
-                return res.redirect();
+            .populate('possible_matches.userWhoLikedYourTrinket')
+            .populate('possible_matches.trinketTheyLiked')
+            .populate('final_matches.userWhoLikedYourTrinket')
+            .populate('final_matches.yourTrinketTheyLiked')
+            .populate('final_matches.theirTrinketYouLiked')
+            .exec(function(err, result) {
+                if (err) res.status(500).json(err);
+                res.json(result);
             })
     },
 
@@ -24,17 +30,50 @@ module.exports = {
         Users
             .findById({_id: req.user._id})
             .populate('user_trinkets')
+            .populate('possible_matches.userWhoLikedYourTrinket')
+            .populate('possible_matches.trinketTheyLiked')
+            .populate('final_matches.userWhoLikedYourTrinket')
+            .populate('final_matches.yourTrinketTheyLiked')
+            .populate('final_matches.theirTrinketYouLiked')
             .exec(function(err, user) {
                 if (err) console.log('error', err);
                 //console.log('USER FROM /auth/me', user);
+                var matchArray = user.final_matches;
+                //console.log('user FINAL MATCHES userctrl 42', user.final_matches);
+
+
+                //console.log('user in UserCtrl (43)', user);
+
+                for (var i = 0; i < matchArray.length; i++) {
+                    console.log(i, '||||||||||||||||||||||||||', matchArray[i]);
+                }
+
                 var tailoredUserInfo = {
                     name: user.google.name,
                     email: user.google.email,
-                    trinkets: user.user_trinkets
-                };
-                return res.json(tailoredUserInfo);
+                    trinkets: user.user_trinkets,
+                    matches: user.final_matches
+                    //matches: {
+                    //    theirTrinketYouLiked: {
+                    //        title: match.theirTrinketYouLiked.title,
+                    //        description: match.theirTrinketYouLiked.description,
+                    //        image: match.theirTrinketYouLiked.image
+                    //    },
+                    //    yourTrinketTheyLiked: {
+                    //        title: match.yourTrinketTheyLiked.title,
+                    //        description: match.yourTrinketTheyLiked.description,
+                    //        image: match.yourTrinketTheyLiked.image
+                    //    },
+                    //    userWhoLikedYourTrinket: {
+                    //        name: match.userWhoLikedYourTrinket.google.name,
+                    //        email: match.userWhoLikedYourTrinket.google.email
+                    //    }
+                    //} //matches
+                }; //tailored info
+                return res.status(200).json(tailoredUserInfo);
             });
     },
+
 
 
     // TODO make it so the user moves reference of block to dislikes

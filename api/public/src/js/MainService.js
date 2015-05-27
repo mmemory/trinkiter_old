@@ -14,28 +14,6 @@ app.service('MainService', function($http, CONSTANT, $q) {
     /////////////////////////////////////////
 
     /*
-     * Register User
-     */
-    this.registerUser = function(email, firstName, lastName) {
-        var userData = {
-            user_info: {
-                name: {
-                    first_name: firstName,
-                    last_name: lastName
-                },
-                email: email
-            }
-        };
-        $http.post(userUrl, userData)
-            .success(function(data) {
-                console.log('user info sent to mongodb');
-            })
-            .error(function(data) {
-                console.log('Error', data);
-            })
-    };
-
-    /*
      * Add new Trinkit
      */
     this.createTrinket = function(title, image, description) {
@@ -169,7 +147,12 @@ app.service('MainService', function($http, CONSTANT, $q) {
                 console.log('Error', data);
             });
         return dfd.promise;
-    }
+
+    };
+
+    //this.deleteMatch = function(matchId) {
+    //    var matchIdUrl = matchId +
+    //}
 
 });
 

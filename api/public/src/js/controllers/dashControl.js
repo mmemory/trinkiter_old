@@ -1,6 +1,6 @@
 var app = angular.module('trinkApp');
 
-app.controller('dashControl', function($scope, MainService) {
+app.controller('dashControl', function($scope, MainService, getUser) {
 
     // Empties the input fields for the 'new item' modal popup
     var setNewBlockFieldsBlank = function() {
@@ -65,15 +65,33 @@ app.controller('dashControl', function($scope, MainService) {
             })
     };
 
-    var getCurrentUser = function() {
-        MainService.getCurrentUser()
-            .then(function(user) {
-                //console.log('Current user is on $scope (dashControl.js)', user);
-                $scope.userName = user.name;
-                $scope.userEmail = user.email;
-                $scope.userTrinkets = user.trinkets;
+    $scope.userName = getUser.name;
+    $scope.userEmail = getUser.email;
+    $scope.userTrinkets = getUser.trinkets;
+    $scope.matches = getUser.matches;
+
+    //var getCurrentUser = function() {
+    //    console.log('DASH CONTROL GET USER CALLED');
+    //    MainService.getCurrentUser()
+    //        .then(function(user) {
+    //            console.log('Current user is on $scope (dashControl.js)', user);
+    //            $scope.userName = user.name;
+    //            $scope.userEmail = user.email;
+    //            $scope.userTrinkets = user.trinkets;
+    //            $scope.matches = user.matches;
+    //            console.log('matches from controller', $scope.matches);
+    //        })
+    //};
+    //getCurrentUser();
+
+    $scope.deleteMatch = function(match) {
+        var index = $scope.matches.indexOf(match);
+
+        var matchId = match._id;
+        MainService.deleteMatch()
+            .then(function(result) {
+                $scope.matches.splice(index, 1)
             })
-    };
-    getCurrentUser();
+    }
 
 });

@@ -29,7 +29,7 @@ a:hover {
   height: 100%;
   padding: 20px;
   box-sizing: border-box;
-  border-top: solid 1px #555555;
+  border-top: solid 1px #7fd2f8;
 }
 /* line 11, ../../src/styles/partials/_blocks.scss */
 .blocks .block {
@@ -472,20 +472,22 @@ a:hover {
   right: 0;
   border-left: solid 1px #555555;
 }
-/* line 30, ../../src/styles/partials/_userTrinkets.scss */
-.trinkets-container .trinket .trinket-controls .icon-trash {
+
+/* line 33, ../../src/styles/partials/_userTrinkets.scss */
+.icon-trash {
   cursor: pointer;
 }
-/* line 33, ../../src/styles/partials/_userTrinkets.scss */
-.trinkets-container .trinket .trinket-controls .icon-trash:hover {
+/* line 36, ../../src/styles/partials/_userTrinkets.scss */
+.icon-trash:hover {
   color: red;
 }
-/* line 38, ../../src/styles/partials/_userTrinkets.scss */
-.trinkets-container .trinket .trinket-controls .icon-edit {
+
+/* line 41, ../../src/styles/partials/_userTrinkets.scss */
+.icon-edit {
   cursor: pointer;
 }
-/* line 41, ../../src/styles/partials/_userTrinkets.scss */
-.trinkets-container .trinket .trinket-controls .icon-edit:hover {
+/* line 44, ../../src/styles/partials/_userTrinkets.scss */
+.icon-edit:hover {
   color: #0b94d3;
 }
 
@@ -495,10 +497,47 @@ a:hover {
   height: 100%;
   background-color: white;
   position: fixed;
-  border-left: solid 1px #555555;
+  border-left: solid 1px #bbbbbb;
   right: 0;
   top: 108px;
   overflow-y: auto;
-  padding: 10px;
   box-sizing: border-box;
+}
+/* line 12, ../../src/styles/partials/_dashSidebar.scss */
+.dash-sidebar .match-header-wrapper {
+  border-bottom: solid 1px #7fd2f8;
+  padding: 6px;
+}
+/* line 17, ../../src/styles/partials/_dashSidebar.scss */
+.dash-sidebar .match {
+  margin-top: 14px;
+}
+/* line 21, ../../src/styles/partials/_dashSidebar.scss */
+.dash-sidebar .match-component {
+  border-bottom: solid 1px #7fd2f8;
+  padding: 10px;
+}
+/* line 26, ../../src/styles/partials/_dashSidebar.scss */
+.dash-sidebar .match-component:hover {
+  background-color: #f3fbfe;
+}
+/* line 30, ../../src/styles/partials/_dashSidebar.scss */
+.dash-sidebar .match-component .item-match-warning {
+  color: red;
+  letter-spacing: 0;
+  font-size: 10px;
+}
+/* line 37, ../../src/styles/partials/_dashSidebar.scss */
+.dash-sidebar p {
+  line-height: 5px;
+  font-size: 13px;
+}
+/* line 42, ../../src/styles/partials/_dashSidebar.scss */
+.dash-sidebar .match-header {
+  color: #0b94d3;
+}
+
+/* line 1, ../../src/styles/partials/custom.scss */
+.prevent-scroll {
+  overflow: hidden;
 }

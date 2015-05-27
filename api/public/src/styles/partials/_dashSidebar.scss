@@ -3,10 +3,43 @@
   height: 100%;
   background-color: white;
   position: fixed;
-  border-left: solid 1px $body-color;
+  border-left: solid 1px lighten($body-color, 40%);
   right: 0;
   top: 108px;
   overflow-y: auto;
-  padding: 10px;
   box-sizing: border-box;
+
+  .match-header-wrapper {
+    border-bottom: solid 1px lighten($component-color, 30%);
+    padding: 6px;
+  }
+
+  .match {
+    margin-top: 14px;
+  }
+
+  .match-component {
+    border-bottom: solid 1px lighten($component-color, 30%);
+    padding: 10px;
+    //box-shadow: 0px 5px 6px -5px #000000;
+
+    &:hover {
+      background-color: lighten($component-color, 54%);
+    }
+
+    .item-match-warning {
+      color: red;
+      letter-spacing: 0;
+      font-size: 10px;
+    }
+  }
+
+  p {
+    line-height: 5px;
+    font-size: 13px;
+  }
+
+  .match-header {
+    color: $component-color;
+  }
 }

@@ -44,7 +44,7 @@ module.exports = {
                 //console.log('****User who owns the trinket that was liked:', trinketResult.user_id);
                 //console.log('****req.user._id', req.user._id);
                 User
-                    .findByIdAndUpdate(trinketResult.user_id, {$addToSet: {'possible_matches': {userWhoLikedYourTrinket: req.user._id, trinketTheyLiked: trinketResult._id}}}, {new: true}, function(err, userResult) {
+                    .findByIdAndUpdate(trinketResult.user_id, {$addToSet: {'possible_matches': {userWhoLikedYourTrinket: req.user._id, trinketTheyLiked: trinketResult._id}}}, {new: true}, function(err, trinketOwnerResult) {
                         //console.log('****User who did the liking:', req.user._id);
                         //console.log('User after someone liked their trinket:', userResult);
                         //console.log(err);
@@ -53,93 +53,121 @@ module.exports = {
 
                         //else res.json(userResult);
 
-                        //var trinketUserPossibleMatchArray = userResult.possible_matches;
-                        var currentUser = req.user,
-                            trinketOwner = userResult,
-                            trinketOwnerId = userResult._id.toString(),
-                            currentUserId = req.user._id,
-                            referencedTrinket = trinketResult,
-                            referencedTrinketId = trinketResult._id,
-                            trinketOwnerPossibleMatchArray = trinketOwner.possible_matches,
-                            currentUserPossibleMatchArray = req.user.possible_matches,
-                            currentUserFinalMatchArray = req.user.final_matches,
-                            trinketCurrentUserLiked,
-                            trinketTrinketOwnerLiked;
+                        User
+                            .findById(req.user._id, function(err, userResult) {
+
+                                //var trinketUserPossibleMatchArray = userResult.possible_matches;
+                                var currentUser = userResult,
+                                    trinketOwner = trinketOwnerResult,
+                                    referencedTrinket = trinketResult,
+
+                                    currentUserId = currentUser._id.toString(),
+                                    trinketOwnerId = trinketOwner._id.toString(),
+                                    referencedTrinketId = referencedTrinket._id,
+                                    trinketOwnerPossibleMatchArray = trinketOwner.possible_matches,
+                                    currentUserPossibleMatchArray = currentUser.possible_matches,
+                                    currentUserFinalMatchArray = currentUser.final_matches,
+
+                                // Variable is figured out in loop below
+                                    trinketTrinketOwnerLiked;
 
 
-                        // Find trinket ID that CURRENT USER LIKED
-                        for (var z = 0; z < trinketOwnerPossibleMatchArray.length; z++) {
-                            console.log('first loop fired', z);
-                            if (currentUserId !== trinketOwnerPossibleMatchArray[z].userWhoLikedYourTrinket) {
-                                trinketCurrentUserLiked = trinketOwnerPossibleMatchArray[z].userWhoLikedYourTrinket;
-                                //console.log('trinket current user liked', trinketCurrentUserLiked);
-                            }
-                        }
 
-                        //// Find trinket ID that TRINKET OWNER LIKED
-                        //for (var t = 0; t < currentUserPossibleMatchArray.length; t++) {
-                        //    console.log('second loop fired', t);
-                        //    if (currentUserId !== trinketOwnerPossibleMatchArray[t].userWhoLikedYourTrinket) {
-                        //        trinketTrinketOwnerLiked = trinketOwnerPossibleMatchArray[t].userWhoLikedYourTrinket;
-                        //        //console.log('trinket current user liked', trinketCurrentUserLiked);
-                        //    }
-                        //}
-
-                       //console.log('current user possible match array:', currentUserPossibleMatchArray);
-                       //console.log('trinket owner id', typeof trinketOwnerId);
-                       //console.log('true or false', trinketOwnerId === currentUserPossibleMatchArray[0].userWhoLikedYourTrinket);
+                                console.log('current user ID:', currentUserId);
+                                console.log('trinket owner ID:', trinketOwnerId);
+                                console.log('referenced trinket ID:', referencedTrinketId);
+                                //console.log('current user possible matches array:', currentUserPossibleMatchArray);
+                                console.log('current user possible matches array length:', currentUserPossibleMatchArray.length);
+                                //console.log('trinket owner possible matches array:', trinketOwnerPossibleMatchArray);
 
 
-                       for (var i = 0; i < currentUserPossibleMatchArray.length; i++) {
-                           //console.log('current user possible match array length:', currentUserPossibleMatchArray.length);
-                           //console.log('second loop fired', i);
+                                // Find trinket ID that CURRENT USER LIKED
+                                //for (var z = 0; z < trinketOwnerPossibleMatchArray.length; z++) {
+                                //    //console.log('first loop fired', z);
+                                //    if (currentUserId === trinketOwnerPossibleMatchArray[z].userWhoLikedYourTrinket.toString()) {
+                                //        trinketCurrentUserLiked = trinketOwnerPossibleMatchArray[z].trinketTheyLiked;
+                                //        console.log('trinket current user liked', trinketCurrentUserLiked);
+                                //        return;
+                                //    }
+                                //}
 
-                           //console.log('user who liked your trinket from loop:', typeof currentUserPossibleMatchArray[i].userWhoLikedYourTrinket);
-                           //console.log('currentUserPossibleMatchArray:',currentUserPossibleMatchArray);
-                           if (trinketOwnerId === currentUserPossibleMatchArray[i].userWhoLikedYourTrinket) {
-                               console.log('if fired');
+                                for (var z = 0; z < currentUserPossibleMatchArray.length; z++) {
+                                    //console.log('first loop fired', z);
+                                    if (trinketOwnerId === currentUserPossibleMatchArray[z].userWhoLikedYourTrinket.toString()) {
+                                        trinketTrinketOwnerLiked = currentUserPossibleMatchArray[z].trinketTheyLiked;
+                                        console.log('trinket current user liked:', trinketTrinketOwnerLiked);
+                                        break;
+                                    }
+                                }
 
-                               User.findByIdAndUpdate(currentUserId,
-                                   {$addToSet:
-                                       {'final_matches':
-                                           {
-                                               userWhoLikedYourTrinket: trinketOwnerId,
-                                               yourTrinketTheyLiked: referencedTrinketId,
-                                               theirTrinketYouLiked: trinketCurrentUserLiked
-                                           }
-                                       }
-                                   }, {new: true}, function(err, finalResult) {
-                                   if (err) console.log(err);
-                                   console.log('FINAL RESULT FINAL MATCHES:', finalResult.final_matches);
-                                   //else res.status(200).json(finalResult);
-                               });
+                                //console.log('current user possible match array:', currentUserPossibleMatchArray);
+                                //console.log('trinket owner id', typeof trinketOwnerId);
+                                //console.log('true or false', trinketOwnerId === currentUserPossibleMatchArray[0].userWhoLikedYourTrinket);
+                                //console.log(trinketOwnerId === currentUserPossibleMatchArray[0].userWhoLikedYourTrinket);
 
-                               User.findByIdAndUpdate(trinketOwnerId,
-                                   {$addToSet:
-                                       {'final_matches':
-                                           {
-                                               userWhoLikedYourTrinket: currentUserId,
-                                               yourTrinketTheyLiked: trinketCurrentUserLiked,
-                                               theirTrinketYouLiked: referencedTrinketId
+                                if (trinketOwnerPossibleMatchArray.length > 0 || currentUserPossibleMatchArray.length > 0) {
+                                    for (var i = 0; i < currentUserPossibleMatchArray.length; i++) {
+                                        //console.log('current user possible match array length:', currentUserPossibleMatchArray.length);
+                                        //console.log('second loop fired', i);
 
-                                           }
-                                       }
-                                   }, function(err, finalResult) {
-                                       if (err) console.log(err);
-                                       //console.log('FINAL RESULT FINAL MATCHES:', finalResult.final_matches);
-                                       //else res.status(200).json(finalResult);
-                                   });
+                                        //console.log('user who liked your trinket from loop:', typeof currentUserPossibleMatchArray[i].userWhoLikedYourTrinket);
+                                        //console.log('currentUserPossibleMatchArray:',currentUserPossibleMatchArray);
+                                        if (trinketOwnerId === currentUserPossibleMatchArray[i].userWhoLikedYourTrinket.toString()) {
+                                            console.log('if fired');
 
-                               //console.log('current user final match array:', currentUserFinalMatchArray);
-                           } else {
-                               console.log("IDs don't match. Sorry!");
+                                            User.findByIdAndUpdate(currentUserId,
+                                                {
+                                                    $addToSet: {
+                                                        'final_matches': {
+                                                            userWhoLikedYourTrinket: trinketOwnerId,
+                                                            yourTrinketTheyLiked: trinketTrinketOwnerLiked,
+                                                            theirTrinketYouLiked: referencedTrinketId
 
-                               //currentUserPossibleMatchArray.push(possibleMatchInfo);
-                           }
-                       } // second loop
-                    });
-            })
-    },
+                                                        }
+                                                    }
+                                                }, {new: true}, function(err, result) {
+                                                    if (err) res.status(500).json(err);
+                                                    //console.log('FINAL RESULT FINAL MATCHES:', result.final_matches);
+                                                    //else res.status(200).json(finalResult);
+                                                    console.log('success in matching!');
+
+                                                    User.findByIdAndUpdate(trinketOwnerId,
+                                                        {
+                                                            $addToSet: {
+                                                                'final_matches': {
+                                                                    userWhoLikedYourTrinket: currentUserId,
+                                                                    yourTrinketTheyLiked: referencedTrinketId,
+                                                                    theirTrinketYouLiked: trinketTrinketOwnerLiked
+
+
+                                                                }
+                                                            }
+                                                        }, function(err, finalResult) {
+                                                            if (err) res.status(500).json(err);
+                                                            //console.log('FINAL RESULT FINAL MATCHES:', finalResult.final_matches);
+                                                            res.end();
+                                                            // else return res.status(200).json(finalResult);
+
+                                                        });
+
+                                                    res.end();
+                                                });
+
+
+
+
+                                            //console.log('current user final match array:', currentUserFinalMatchArray);
+                                        } else {
+                                            console.log("IDs don't match. Sorry!");
+
+                                            //currentUserPossibleMatchArray.push(possibleMatchInfo);
+                                        }
+                                    } //second loop
+                                } // if above zero
+                            });
+                    }); // findByIdAndUpdate - User
+            }); // findByIdAndUpdate - Trinket
+    }, // assign trinket like
 
     assignTrinketHate: function(req, res) {
         Trinkets
@@ -153,12 +181,11 @@ module.exports = {
     },
 
     get: function(req, res) {
-        Trinkets.find()
-            .populate('usersWhoLiked')
-            .exec(function(err, result) {
+        Trinkets
+            .find(function(err, result) {
                 if (err) res.status(500).json(err);
                 else res.json(result);
-            });
+            })
     },
 
     update: function(req, res) {

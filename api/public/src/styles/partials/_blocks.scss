@@ -6,7 +6,7 @@
   height: 100%;
   padding: 20px;
   box-sizing: border-box;
-  border-top: solid 1px $body-color;
+  border-top: solid 1px lighten($component-color, 30%);
 
   .block {
     @include float-span(5);
