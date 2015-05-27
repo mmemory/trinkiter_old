@@ -35,7 +35,7 @@ app.controller('dashControl', function($scope, MainService, getUser) {
         MainService.getTrinketList()
             .then(function(data) {
                 $scope.blocks = data;
-                //console.log('trinket list:', data);
+                console.log('trinket list:', data);
             });
     };
     displayTrinkets();

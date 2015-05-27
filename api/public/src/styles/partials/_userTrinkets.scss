@@ -1,11 +1,11 @@
 .trinkets-container {
   height: 100%;
-  width: calc(100% - 250px);
-  border-top: solid 1px $body-color;
+  width: calc(100% - 275px);
+  border-top: solid 1px $border-color-main;
   .trinket {
     width: 100%;
-    height: 50px;
-    border-bottom: solid 1px $body-color;
+    height: 131px;
+    border-bottom: solid 1px $border-color-main;
 
     &:hover {
       background-color: lighten($component-color, 52%);
@@ -14,8 +14,48 @@
 
     p {
       display: inline-block;
-      margin: 17px 0 0 20px;
+      margin: 15px 0 0 20px;
       color: $component-color;
+    }
+
+    .trinket-list-image {
+      display: inline-block;
+      border: solid 1px red;
+      height: 100%;
+      width: 120px;
+      overflow: hidden;
+      margin-right: 50px;
+
+      img {
+        width: 120px;
+        //float: right;
+      }
+
+    }
+
+    .trinket-list--text {
+      display: inline-block;
+      //border: solid 1px yellow;
+      width: calc(100% - 175px);
+
+      .trinket-list-title--wrapper {
+        width: 60%;
+        //border: solid 1px green;
+        .text-title--text {
+          color: $body-color;
+        } // title text
+      } // title wrapper
+
+      .trinket-list-description--wrapper {
+        width: 70%;
+        //border: solid 1px red;
+
+        .text-description--text {
+          color: $body-color;
+        }
+      }
+
+
     }
 
     .trinket-controls {
@@ -25,24 +65,32 @@
       height: 100%;
       position: relative;
       right: 0;
-      border-left: solid 1px $body-color;
-    } // trinket controls
-  } // trinket
-} //
+      border-left: solid 1px $border-color-main;
+    }
+    // trinket controls
+  }
+  // trinket
+}
+
+//
 
 .icon-trash {
   cursor: pointer;
 
   &:hover {
     color: red;
-  } // hover
-} // icon-trash
+  }
+  // hover
+}
+
+// icon-trash
 
 .icon-edit {
   cursor: pointer;
+  margin-top: 3px;
 
   &:hover {
-    color: $component-color;
+    color: darkgreen;
   }
 }
 

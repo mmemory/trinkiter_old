@@ -4,14 +4,14 @@
   background-color: rgba(100, 100, 100, .95);
   position: fixed;
   z-index: 1000;
-  padding-top: 100px;
+  padding-top: 75px;
   top: 0;
 }
 
 .modal-add--wrapper {
   width: 30%;
   max-width: 400px;
-  height: 400px;
+  height: 450px;
   background-color: #ffffff;
   margin: 0 auto;
   padding: 20px;
@@ -27,9 +27,9 @@
 
 .icon-close {
   cursor: pointer;
-  position: absolute;
-  top: 110px;
-  right: 440px;
+  position: relative;
+  top: 10px;
+  right: -354px;
   font-size: 30px;
   margin: 0;
   color: $component-color;

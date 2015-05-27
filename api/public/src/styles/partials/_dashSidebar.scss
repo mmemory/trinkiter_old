@@ -1,12 +1,12 @@
 .dash-sidebar {
-  width: 250px;
+  width: 275px;
   height: 100%;
   background-color: white;
   position: fixed;
   border-left: solid 1px lighten($body-color, 40%);
   right: 0;
   top: 108px;
-  overflow-y: auto;
+  overflow: auto;
   box-sizing: border-box;
 
   .match-header-wrapper {

@@ -2,11 +2,17 @@
 <p class="view-description">Here is a list of all the trinkets you've posted. You can edit or delete them.</p>
 <section class="trinkets-container">
 	<section class="trinket" ng-repeat="trinket in userTrinkets">
-		<p>{{trinket.title}}: </p>
-		<p>{{trinket.description}}</p>
+		<section class="trinket-list--text">
+			<div class="trinket-list-title--wrapper"><p class="trinket-list--title">title: <span class="text-title--text">{{trinket.title}}</span></p></div>
+			<div class="trinket-list-description--wrapper"><p class="trinket-list--description">description: <span class="text-description--text">{{trinket.description}}</span></p></div>
+		</section>
+		<!--<section class="trinket-list-image">-->
+			<!--<img ng-src="{{trinket.image}}" alt="{{trinket.title}}" width="120px"/>-->
+		<!--</section>-->
 		<section class="trinket-controls">
 			<p class="icon-trash" ng-click="deleteTrinket(trinket)"><i class="fa fa-trash-o"></i></p>
-			<p class="icon-edit" ng-click="deleteTrinket(trinket)"><i class="fa fa-pencil-square-o"></i></p>
+			<p class="icon-edit" ng-click="toggleEditWindow()"><i class="fa fa-pencil-square-o"></i></p> <br/>
+			<p>likes: {{trinket.usersWhoLiked.length}}</p>
 		</section>
 	</section>
 </section>

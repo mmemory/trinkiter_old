@@ -21,9 +21,10 @@
 		<h2>add an item</h2>
 
 		<form class="form-main--form" name="addItem" ng-submit="submitNewBlock()">
+			<!--<input type="file"/>-->
 			<input class="form-main--input form-main--text" type="text" placeholder="image url"
 					ng-model="block.imageurl"/>
-			<input class="form-main--input form-main--text" type="text" placeholder="title"
+			<input class="form-main--input form-main--text" type="text" placeholder="title" maxlength="30"
 					ng-model="block.title"/>
 			<textarea class="form-main--input form-main--textarea" placeholder="description" maxlength="177"
 					ng-model="block.description"></textarea>
@@ -36,17 +37,20 @@
 <!-- Begin Dashboard Content -->
 <section class="wrapper-dashboard" ui-view>
 </section><!-- End Dashboard Content -->
+
 <section class="dash-sidebar">
 	<section class="match-header-wrapper"><h2 class="view-header match">your matches</h2></section>
 	<section class="match-component" ng-repeat="match in matches">
 		<p class="match-header">you matched with:</p>
 		<p>{{match.userWhoLikedYourTrinket.google.email}}</p>
+
 		<p ng-show="match.yourTrinketTheyLiked.title"><span class="match-header">they liked:</span> {{match.yourTrinketTheyLiked.title}}</p>
 		<p ng-hide="match.yourTrinketTheyLiked.title"><span class="match-header">they liked:</span> <span class="item-match-warning">REMOVED BY USER</span></p>
+
 		<p ng-show="match.theirTrinketYouLiked.title"><span class="match-header">you liked:</span> {{match.theirTrinketYouLiked.title}}</p>
 		<p ng-hide="match.theirTrinketYouLiked.title"><span class="match-header">you liked:</span> <span class="item-match-warning">REMOVED BY USER</span></p>
 
-		<p ng-click="deleteMatch(match)"><i class="fa fa-trash-o icon-trash"></i></p>
+		<p ng-click="deleteMatch(match)"><i class="fa fa-trash-o icon-trash"> delete match</i></p>
 	</section>
 
 </section>

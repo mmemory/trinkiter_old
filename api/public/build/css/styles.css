@@ -25,7 +25,7 @@ a:hover {
 
 /* line 4, ../../src/styles/partials/_blocks.scss */
 .blocks {
-  width: calc(100% - 250px);
+  width: calc(100% - 275px);
   height: 100%;
   padding: 20px;
   box-sizing: border-box;
@@ -65,49 +65,39 @@ a:hover {
 /* line 38, ../../src/styles/partials/_blocks.scss */
 .blocks .block .block-title {
   color: #0b94d3;
+  margin-top: 0;
 }
-/* line 42, ../../src/styles/partials/_blocks.scss */
+/* line 43, ../../src/styles/partials/_blocks.scss */
 .blocks .block .block-description {
   width: 100%;
 }
-/* line 46, ../../src/styles/partials/_blocks.scss */
+/* line 47, ../../src/styles/partials/_blocks.scss */
 .blocks .block .text-wrapper {
   height: 200px;
   padding: 10px;
 }
-/* line 51, ../../src/styles/partials/_blocks.scss */
+/* line 52, ../../src/styles/partials/_blocks.scss */
 .blocks .block .icon-wrapper {
   height: 20px;
   width: 100%;
   float: left;
 }
-/* line 57, ../../src/styles/partials/_blocks.scss */
+/* line 58, ../../src/styles/partials/_blocks.scss */
 .blocks .block .icon-trash, .blocks .block .icon-check {
-  font-size: 30px;
+  font-size: 3rem;
   position: relative;
-  bottom: 40px;
-  display: block;
-  cursor: pointer;
+  bottom: 25px;
   color: #0b94d3;
   transition: .2s;
-}
-/* line 67, ../../src/styles/partials/_blocks.scss */
-.blocks .block .icon-trash {
-  float: left;
-  margin-left: 10px;
-}
-/* line 71, ../../src/styles/partials/_blocks.scss */
-.blocks .block .icon-trash:hover {
-  color: #DC713E;
-  text-shadow: 0px 1px #bbb;
-  transition: .2s;
+  text-align: center;
 }
 /* line 78, ../../src/styles/partials/_blocks.scss */
 .blocks .block .icon-check {
-  float: right;
-  margin-right: 10px;
+  display: block;
+  margin: 0 auto;
+  cursor: pointer;
 }
-/* line 82, ../../src/styles/partials/_blocks.scss */
+/* line 84, ../../src/styles/partials/_blocks.scss */
 .blocks .block .icon-check:hover {
   color: #4ec1f6;
   text-shadow: 0 1px #999;
@@ -296,7 +286,7 @@ a:hover {
   background-color: rgba(100, 100, 100, 0.95);
   position: fixed;
   z-index: 1000;
-  padding-top: 100px;
+  padding-top: 75px;
   top: 0;
 }
 
@@ -304,7 +294,7 @@ a:hover {
 .modal-add--wrapper {
   width: 30%;
   max-width: 400px;
-  height: 400px;
+  height: 450px;
   background-color: #ffffff;
   margin: 0 auto;
   padding: 20px;
@@ -321,9 +311,9 @@ a:hover {
 /* line 28, ../../src/styles/partials/_modal.scss */
 .icon-close {
   cursor: pointer;
-  position: absolute;
-  top: 110px;
-  right: 440px;
+  position: relative;
+  top: 10px;
+  right: -354px;
   font-size: 30px;
   margin: 0;
   color: #0b94d3;
@@ -424,7 +414,7 @@ a:hover {
 }
 /* line 61, ../../src/styles/partials/_dashboardNav.scss */
 .nav-dashboard .icon-myDash:after {
-  content: 'my items';
+  content: 'my trinkets';
   position: relative;
   left: 5px;
 }
@@ -443,14 +433,14 @@ a:hover {
 /* line 1, ../../src/styles/partials/_userTrinkets.scss */
 .trinkets-container {
   height: 100%;
-  width: calc(100% - 250px);
-  border-top: solid 1px #555555;
+  width: calc(100% - 275px);
+  border-top: solid 1px #7fd2f8;
 }
 /* line 5, ../../src/styles/partials/_userTrinkets.scss */
 .trinkets-container .trinket {
   width: 100%;
-  height: 50px;
-  border-bottom: solid 1px #555555;
+  height: 131px;
+  border-bottom: solid 1px #7fd2f8;
 }
 /* line 10, ../../src/styles/partials/_userTrinkets.scss */
 .trinkets-container .trinket:hover {
@@ -460,47 +450,82 @@ a:hover {
 /* line 15, ../../src/styles/partials/_userTrinkets.scss */
 .trinkets-container .trinket p {
   display: inline-block;
-  margin: 17px 0 0 20px;
+  margin: 15px 0 0 20px;
   color: #0b94d3;
 }
 /* line 21, ../../src/styles/partials/_userTrinkets.scss */
+.trinkets-container .trinket .trinket-list-image {
+  display: inline-block;
+  border: solid 1px red;
+  height: 100%;
+  width: 120px;
+  overflow: hidden;
+  margin-right: 50px;
+}
+/* line 29, ../../src/styles/partials/_userTrinkets.scss */
+.trinkets-container .trinket .trinket-list-image img {
+  width: 120px;
+}
+/* line 36, ../../src/styles/partials/_userTrinkets.scss */
+.trinkets-container .trinket .trinket-list--text {
+  display: inline-block;
+  width: calc(100% - 175px);
+}
+/* line 41, ../../src/styles/partials/_userTrinkets.scss */
+.trinkets-container .trinket .trinket-list--text .trinket-list-title--wrapper {
+  width: 60%;
+}
+/* line 44, ../../src/styles/partials/_userTrinkets.scss */
+.trinkets-container .trinket .trinket-list--text .trinket-list-title--wrapper .text-title--text {
+  color: #555555;
+}
+/* line 49, ../../src/styles/partials/_userTrinkets.scss */
+.trinkets-container .trinket .trinket-list--text .trinket-list-description--wrapper {
+  width: 70%;
+}
+/* line 53, ../../src/styles/partials/_userTrinkets.scss */
+.trinkets-container .trinket .trinket-list--text .trinket-list-description--wrapper .text-description--text {
+  color: #555555;
+}
+/* line 61, ../../src/styles/partials/_userTrinkets.scss */
 .trinkets-container .trinket .trinket-controls {
   float: right;
   width: 170px;
   height: 100%;
   position: relative;
   right: 0;
-  border-left: solid 1px #555555;
+  border-left: solid 1px #7fd2f8;
 }
 
-/* line 33, ../../src/styles/partials/_userTrinkets.scss */
+/* line 77, ../../src/styles/partials/_userTrinkets.scss */
 .icon-trash {
   cursor: pointer;
 }
-/* line 36, ../../src/styles/partials/_userTrinkets.scss */
+/* line 80, ../../src/styles/partials/_userTrinkets.scss */
 .icon-trash:hover {
   color: red;
 }
 
-/* line 41, ../../src/styles/partials/_userTrinkets.scss */
+/* line 88, ../../src/styles/partials/_userTrinkets.scss */
 .icon-edit {
   cursor: pointer;
+  margin-top: 3px;
 }
-/* line 44, ../../src/styles/partials/_userTrinkets.scss */
+/* line 92, ../../src/styles/partials/_userTrinkets.scss */
 .icon-edit:hover {
-  color: #0b94d3;
+  color: darkgreen;
 }
 
 /* line 1, ../../src/styles/partials/_dashSidebar.scss */
 .dash-sidebar {
-  width: 250px;
+  width: 275px;
   height: 100%;
   background-color: white;
   position: fixed;
   border-left: solid 1px #bbbbbb;
   right: 0;
   top: 108px;
-  overflow-y: auto;
+  overflow: auto;
   box-sizing: border-box;
 }
 /* line 12, ../../src/styles/partials/_dashSidebar.scss */
