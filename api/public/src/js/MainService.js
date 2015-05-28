@@ -82,7 +82,7 @@ app.service('MainService', function($http, CONSTANT, $q) {
         var dfd = $q.defer();
         $http.post(trincketIdUrl)
             .success(function(data) {
-                console.log('data from like in service', data._id);
+                //console.log('data from like in service', data._id);
                 console.log('Successfully liked the trinket');
                 dfd.resolve(data._id);
             })
@@ -118,14 +118,13 @@ app.service('MainService', function($http, CONSTANT, $q) {
     /*
      * Delete trinket from array of trinkets
      */
-    //TODO this needs to remove from user dashboard, not from database completely
     this.deleteTrinket = function(trinketId) {
         var trincketIdUrl = trinketUrl + '/' + trinketId;
 
         var dfd = $q.defer();
         $http.delete(trincketIdUrl)
             .success(function(data) {
-                console.log('Successfully deleted');
+                console.log('Successfully deleted trinket');
                 dfd.resolve(data);
             })
             .error(function(data) {
@@ -134,25 +133,39 @@ app.service('MainService', function($http, CONSTANT, $q) {
         return dfd.promise;
     };
 
-    this.dislikeTrinket = function(trinketId, userId) {
-        var userIdUrl = userUrl + '/dislikes/' + userId;
+    //this.dislikeTrinket = function(trinketId, userId) {
+    //    var userIdUrl = userUrl + '/dislikes/' + userId;
+    //
+    //    var dfd = $q.defer();
+    //    $http.put(userIdUrl, {trinketId: trinketId})
+    //        .success(function(data) {
+    //            console.log('Successfully disliked');
+    //            dfd.resolve(data);
+    //        })
+    //        .error(function(data) {
+    //            console.log('Error', data);
+    //        });
+    //    return dfd.promise;
+    //
+    //};
+
+    /*
+     * Delete match from array of matches
+     */
+    this.deleteMatch = function(matchId, otherUserId) {
+        var matchIdUrl = userUrl + '/remove-match/' + matchId + '/' + otherUserId;
 
         var dfd = $q.defer();
-        $http.put(userIdUrl, {trinketId: trinketId})
+        $http.put(matchIdUrl)
             .success(function(data) {
-                console.log('Successfully disliked');
+                console.log('Successfully deleted match');
                 dfd.resolve(data);
             })
             .error(function(data) {
-                console.log('Error', data);
+                console.log('Error deleting match', data);
             });
         return dfd.promise;
-
-    };
-
-    //this.deleteMatch = function(matchId) {
-    //    var matchIdUrl = matchId +
-    //}
+    }
 
 });
 

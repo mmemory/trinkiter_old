@@ -73,23 +73,12 @@ module.exports = {
 
 
 
-                                console.log('current user ID:', currentUserId);
-                                console.log('trinket owner ID:', trinketOwnerId);
-                                console.log('referenced trinket ID:', referencedTrinketId);
+                                //console.log('current user ID:', currentUserId);
+                                //console.log('trinket owner ID:', trinketOwnerId);
+                                //console.log('referenced trinket ID:', referencedTrinketId);
                                 //console.log('current user possible matches array:', currentUserPossibleMatchArray);
-                                console.log('current user possible matches array length:', currentUserPossibleMatchArray.length);
+                                //console.log('current user possible matches array length:', currentUserPossibleMatchArray.length);
                                 //console.log('trinket owner possible matches array:', trinketOwnerPossibleMatchArray);
-
-
-                                // Find trinket ID that CURRENT USER LIKED
-                                //for (var z = 0; z < trinketOwnerPossibleMatchArray.length; z++) {
-                                //    //console.log('first loop fired', z);
-                                //    if (currentUserId === trinketOwnerPossibleMatchArray[z].userWhoLikedYourTrinket.toString()) {
-                                //        trinketCurrentUserLiked = trinketOwnerPossibleMatchArray[z].trinketTheyLiked;
-                                //        console.log('trinket current user liked', trinketCurrentUserLiked);
-                                //        return;
-                                //    }
-                                //}
 
                                 for (var z = 0; z < currentUserPossibleMatchArray.length; z++) {
                                     //console.log('first loop fired', z);
@@ -105,6 +94,10 @@ module.exports = {
                                 //console.log('true or false', trinketOwnerId === currentUserPossibleMatchArray[0].userWhoLikedYourTrinket);
                                 //console.log(trinketOwnerId === currentUserPossibleMatchArray[0].userWhoLikedYourTrinket);
 
+
+                                /*
+                                This adds
+                                 */
                                 if (trinketOwnerPossibleMatchArray.length > 0 || currentUserPossibleMatchArray.length > 0) {
                                     for (var i = 0; i < currentUserPossibleMatchArray.length; i++) {
                                         //console.log('current user possible match array length:', currentUserPossibleMatchArray.length);
@@ -113,7 +106,8 @@ module.exports = {
                                         //console.log('user who liked your trinket from loop:', typeof currentUserPossibleMatchArray[i].userWhoLikedYourTrinket);
                                         //console.log('currentUserPossibleMatchArray:',currentUserPossibleMatchArray);
                                         if (trinketOwnerId === currentUserPossibleMatchArray[i].userWhoLikedYourTrinket.toString()) {
-                                            console.log('if fired');
+
+                                            console.log('if fired', i);
 
                                             User.findByIdAndUpdate(currentUserId,
                                                 {
@@ -130,6 +124,19 @@ module.exports = {
                                                     //console.log('FINAL RESULT FINAL MATCHES:', result.final_matches);
                                                     //else res.status(200).json(finalResult);
                                                     console.log('success in matching!');
+
+                                                    //console.log('+++++++type of result is:', typeof result, 'and it looks like this:', result);
+                                                    //result.possible_matches.splice(i, 1);
+
+
+                                                    // TODO delete possible match for each user when a final match is made
+
+                                                    User.findByIdAndUpdate(result._id, {$pull: {possible_matches: { userWhoLikedYourTrinket: trinketOwner._id }}}, function(err, result) {
+                                                        if (err) res.json(err);
+
+                                                        console.log('deleted possible match from current user');
+                                                    });
+
 
                                                     User.findByIdAndUpdate(trinketOwnerId,
                                                         {
@@ -148,6 +155,11 @@ module.exports = {
                                                             res.end();
                                                             // else return res.status(200).json(finalResult);
 
+                                                            User.findByIdAndUpdate(finalResult._id, {$pull: {possible_matches: { userWhoLikedYourTrinket: currentUser._id }}}, function(err, result) {
+                                                                if (err) res.json(err);
+
+                                                                console.log('deleted possible match from current user');
+                                                            });
                                                         });
 
                                                     res.end();
@@ -185,6 +197,9 @@ module.exports = {
             .find(function(err, result) {
                 if (err) res.status(500).json(err);
                 else res.json(result);
+
+
+
             })
     },
 

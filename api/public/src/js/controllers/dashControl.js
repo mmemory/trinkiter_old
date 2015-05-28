@@ -23,7 +23,6 @@ app.controller('dashControl', function($scope, MainService, getUser) {
     $scope.toggleModal = function() {
         $scope.modalShown = !$scope.modalShown;
     };
-
     $scope.popupShown = false;
     $scope.togglePopup = function() {
         $scope.popupShown = !$scope.popupShown;
@@ -35,7 +34,7 @@ app.controller('dashControl', function($scope, MainService, getUser) {
         MainService.getTrinketList()
             .then(function(data) {
                 $scope.blocks = data;
-                console.log('trinket list:', data);
+                //console.log('trinket list:', data);
             });
     };
     displayTrinkets();
@@ -46,14 +45,18 @@ app.controller('dashControl', function($scope, MainService, getUser) {
         console.log('disliked block ID', blockId);
         MainService.sendAHate(blockId);
     };
-
     // LIKE BUTTON
     $scope.interested = function(block) {
+        var index = $scope.blocks.indexOf(block);
         var blockId = block._id;
-        console.log('liked block ID', blockId);
-        MainService.sendALike(blockId);
+
+        //console.log('liked block ID', blockId);
+        MainService.sendALike(blockId).then(function(err) {
+            $scope.blocks.splice(index, 1);
+        });
     };
 
+    // Delete any sign of trinket in database and view
     $scope.deleteTrinket = function(trinket) {
         console.log('block', trinket);
         var index = $scope.userTrinkets.indexOf(trinket);
@@ -65,30 +68,20 @@ app.controller('dashControl', function($scope, MainService, getUser) {
             })
     };
 
+    // Put user info on $scope
     $scope.userName = getUser.name;
     $scope.userEmail = getUser.email;
     $scope.userTrinkets = getUser.trinkets;
     $scope.matches = getUser.matches;
 
-    //var getCurrentUser = function() {
-    //    console.log('DASH CONTROL GET USER CALLED');
-    //    MainService.getCurrentUser()
-    //        .then(function(user) {
-    //            console.log('Current user is on $scope (dashControl.js)', user);
-    //            $scope.userName = user.name;
-    //            $scope.userEmail = user.email;
-    //            $scope.userTrinkets = user.trinkets;
-    //            $scope.matches = user.matches;
-    //            console.log('matches from controller', $scope.matches);
-    //        })
-    //};
-    //getCurrentUser();
 
+    // Remove match from users database model and view
     $scope.deleteMatch = function(match) {
         var index = $scope.matches.indexOf(match);
-
         var matchId = match._id;
-        MainService.deleteMatch()
+        var otherUserId = match.userWhoLikedYourTrinket._id;
+
+        MainService.deleteMatch(matchId, otherUserId)
             .then(function(result) {
                 $scope.matches.splice(index, 1)
             })

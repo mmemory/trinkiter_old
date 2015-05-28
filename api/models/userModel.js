@@ -19,8 +19,7 @@ var userModel = new mongoose.Schema({
         theirTrinketYouLiked: {type: mongoose.Schema.Types.ObjectId, ref: 'Trinket'}
     }],
     user_trinkets: [{type: mongoose.Schema.Types.ObjectId, ref: 'Trinket'}],
-    user_likes: [{type: mongoose.Schema.Types.ObjectId, ref: 'Trinket'}],
-    user_dislikes: [{type: mongoose.Schema.Types.ObjectId, ref: 'Trinket'}]
+    user_likes: [{type: mongoose.Schema.Types.ObjectId, ref: 'Trinket'}]
 });
 
 module.exports = mongoose.model('User', userModel);
