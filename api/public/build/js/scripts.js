@@ -62,14 +62,16 @@ app.service('MainService', function($http, CONSTANT, $q) {
             description: description,
         };
         //console.log('server created userID', userId);
-
+        var dfd = $q.defer();
         $http.post(trinketUrl, trinketData)
             .success(function(data) {
-                console.log('Trinket successfully created');
+                //console.log('Trinket successfully created', data);
+                dfd.resolve(data);
             })
             .error(function(data) {
-                console.log('Error', data);
-            })
+                console.error('Error creating trinket', data);
+            });
+        return dfd.promise;
     };
 
 
@@ -87,7 +89,7 @@ app.service('MainService', function($http, CONSTANT, $q) {
                 dfd.resolve(data);
             })
             .error(function(data) {
-                console.log('Error', data);
+                console.error('Error', data);
             });
         return dfd.promise;
     };
@@ -103,7 +105,7 @@ app.service('MainService', function($http, CONSTANT, $q) {
                 dfd.resolve(data);
             })
             .error(function(data) {
-                console.log('Error', data);
+                console.error('Error', data);
             });
         return dfd.promise;
     };
@@ -122,30 +124,14 @@ app.service('MainService', function($http, CONSTANT, $q) {
         $http.post(trincketIdUrl)
             .success(function(data) {
                 //console.log('data from like in service', data._id);
-                console.log('Successfully liked the trinket');
-                dfd.resolve(data._id);
+                //console.log('Successfully liked the trinket');
+                console.log('service match data', data);
+                dfd.resolve(data);
             })
             .error(function(data) {
-                console.log('Failed to like the trinket', data);
-            });
-        return dfd.promise;
-    };
+                console.error('Failed to like the trinket', data);
 
-    /*
-     * Send trinket ID to assign user ID to dislikes object
-     */
-    this.sendAHate = function(trinketId) {
-        var trincketIdUrl = trinketUrl + '/hate/' + trinketId;
-
-        var dfd = $q.defer();
-        $http.post(trincketIdUrl)
-            .success(function(data) {
-                console.log('data from hate in service', data._id);
-                console.log('Successfully hated the trinket');
-                dfd.resolve(data._id);
-            })
-            .error(function(data) {
-                console.log('Failed to hate the trinket', data);
+                dfd.reject(data)
             });
         return dfd.promise;
     };
@@ -163,30 +149,14 @@ app.service('MainService', function($http, CONSTANT, $q) {
         var dfd = $q.defer();
         $http.delete(trincketIdUrl)
             .success(function(data) {
-                console.log('Successfully deleted trinket');
+                //console.log('Successfully deleted trinket');
                 dfd.resolve(data);
             })
             .error(function(data) {
-                console.log('Error', data);
+                console.error('Error', data);
             });
         return dfd.promise;
     };
-
-    //this.dislikeTrinket = function(trinketId, userId) {
-    //    var userIdUrl = userUrl + '/dislikes/' + userId;
-    //
-    //    var dfd = $q.defer();
-    //    $http.put(userIdUrl, {trinketId: trinketId})
-    //        .success(function(data) {
-    //            console.log('Successfully disliked');
-    //            dfd.resolve(data);
-    //        })
-    //        .error(function(data) {
-    //            console.log('Error', data);
-    //        });
-    //    return dfd.promise;
-    //
-    //};
 
     /*
      * Delete match from array of matches
@@ -197,11 +167,11 @@ app.service('MainService', function($http, CONSTANT, $q) {
         var dfd = $q.defer();
         $http.put(matchIdUrl)
             .success(function(data) {
-                console.log('Successfully deleted match');
+                //console.log('Successfully deleted match');
                 dfd.resolve(data);
             })
             .error(function(data) {
-                console.log('Error deleting match', data);
+                console.error('Error deleting match', data);
             });
         return dfd.promise;
     }
@@ -213,6 +183,31 @@ app.service('MainService', function($http, CONSTANT, $q) {
 var app = angular.module('trinkApp');
 
 app.controller('dashControl', function($scope, MainService, getUser) {
+    $scope.blocks = [];
+
+    toastr.options = {
+        "closeButton": false,
+        "debug": false,
+        "newestOnTop": true,
+        "progressBar": false,
+        "positionClass": "toast-bottom-center",
+        "preventDuplicates": false,
+        "onclick": null,
+        "showDuration": "300",
+        "hideDuration": "1000",
+        "timeOut": "5000",
+        "extendedTimeOut": "1000",
+        "showEasing": "swing",
+        "hideEasing": "linear",
+        "showMethod": "slideDown",
+        "hideMethod": "fadeOut"
+    };
+
+    // Put user info on $scope
+    $scope.userName = getUser.name;
+    $scope.userEmail = getUser.email;
+    $scope.userTrinkets = getUser.trinkets;
+    $scope.matches = getUser.matches;
 
     // Empties the input fields for the 'new item' modal popup
     var setNewBlockFieldsBlank = function() {
@@ -221,14 +216,6 @@ app.controller('dashControl', function($scope, MainService, getUser) {
         $scope.block.description = '';
     };
 
-    // Create a new trinket
-    $scope.submitNewBlock = function() {
-        displayTrinkets();
-        MainService.createTrinket($scope.block.title, $scope.block.imageurl, $scope.block.description);
-
-        setNewBlockFieldsBlank();
-        $scope.modalShown = false;
-    };
 
     // Toggles 'new item' modal popup
     $scope.modalShown = false;
@@ -246,46 +233,58 @@ app.controller('dashControl', function($scope, MainService, getUser) {
         MainService.getTrinketList()
             .then(function(data) {
                 $scope.blocks = data;
-                //console.log('trinket list:', data);
             });
     };
     displayTrinkets();
 
-    // DISLIKE BUTTON
-    $scope.notInterested = function(block) {
-        var blockId = block._id;
-        console.log('disliked block ID', blockId);
-        MainService.sendAHate(blockId);
+    // Create a new trinket
+    $scope.submitNewBlock = function() {
+        MainService.createTrinket($scope.block.title, $scope.block.imageurl, $scope.block.description)
+            .then(
+            function(data) {
+                $scope.blocks.push(data);
+                //console.log('new trinket controller', data);
+                //console.log($scope.blocks);
+                $scope.modalShown = false;
+                toastr.success('You successfully added a trinket!')
+            },
+            function(error) {
+
+            });
     };
+
     // LIKE BUTTON
     $scope.interested = function(block) {
         var index = $scope.blocks.indexOf(block);
         var blockId = block._id;
+        $scope.blocks.splice(index, 1);
 
-        //console.log('liked block ID', blockId);
-        MainService.sendALike(blockId).then(function(err) {
-            $scope.blocks.splice(index, 1);
-        });
+        MainService.sendALike(blockId)
+            .then(function(data) {
+                console.log('match data', data);
+                toastr.info('Hey! You matched with someone!');
+                $scope.matches.push(data);
+
+            });
+        //displayTrinkets();
     };
 
     // Delete any sign of trinket in database and view
     $scope.deleteTrinket = function(trinket) {
-        console.log('block', trinket);
+        //console.log('block', trinket);
         var index = $scope.userTrinkets.indexOf(trinket);
 
         var blockId = trinket._id;
         MainService.deleteTrinket(blockId)
-            .then(function(data) {
+            .then(
+            function(data) {
                 $scope.userTrinkets.splice(index, 1);
+                toastr.success('You successfully deleted a trinket.');
+            },
+            function(error) {
+                toastr.warning("Sorry that didn't work, try again!")
             })
     };
-
-    // Put user info on $scope
-    $scope.userName = getUser.name;
-    $scope.userEmail = getUser.email;
-    $scope.userTrinkets = getUser.trinkets;
-    $scope.matches = getUser.matches;
-
 
     // Remove match from users database model and view
     $scope.deleteMatch = function(match) {
@@ -294,11 +293,15 @@ app.controller('dashControl', function($scope, MainService, getUser) {
         var otherUserId = match.userWhoLikedYourTrinket._id;
 
         MainService.deleteMatch(matchId, otherUserId)
-            .then(function(result) {
-                $scope.matches.splice(index, 1)
+            .then(
+            function(result) {
+                $scope.matches.splice(index, 1);
+                toastr.success('You successfully deleted a match.');
+            },
+            function(error) {
+                toastr.error('Sorry, something seems to have gone wrong. Try deleting the match again.');
             })
-    }
-
+    };
 });
 var app = angular.module('trinkApp');
 

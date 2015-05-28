@@ -52,24 +52,8 @@ module.exports = {
                     name: user.google.name,
                     email: user.google.email,
                     trinkets: user.user_trinkets,
-                    matches: user.final_matches
-                    // TODO make it so that the user ID is not being sent to the front
-                    //matches: {
-                    //    theirTrinketYouLiked: {
-                    //        title: match.theirTrinketYouLiked.title,
-                    //        description: match.theirTrinketYouLiked.description,
-                    //        image: match.theirTrinketYouLiked.image
-                    //    },
-                    //    yourTrinketTheyLiked: {
-                    //        title: match.yourTrinketTheyLiked.title,
-                    //        description: match.yourTrinketTheyLiked.description,
-                    //        image: match.yourTrinketTheyLiked.image
-                    //    },
-                    //    userWhoLikedYourTrinket: {
-                    //        name: match.userWhoLikedYourTrinket.google.name,
-                    //        email: match.userWhoLikedYourTrinket.google.email
-                    //    }
-                    //} //matches
+                    matches: user.final_matches,
+                    _id: user._id
                 }; //tailored info
                 return res.status(200).json(tailoredUserInfo);
             });

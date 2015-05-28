@@ -30,8 +30,8 @@ module.exports = {
         })
     },
 
-    // TODO this function needs to work. fix it!!
-    // When a user likes someone else's trinket this function...
+    // TODO add trinket ID to user_likes on like
+    // When User#1 (current user) likes User#2's trinket this function checks for an existing possible match in User#2's model. If none exist, then one is created. If one exists, then a final match is created in both users' models, and the possible matches are removed
     assignTrinketLike: function(req, res) {
         console.log('like button pressed');
         Trinkets
@@ -54,7 +54,7 @@ module.exports = {
                         //else res.json(userResult);
 
                         User
-                            .findById(req.user._id, function(err, userResult) {
+                            .findByIdAndUpdate(req.user._id, {$addToSet: {'user_likes': trinketResult._id}}, {new: true}, function(err, userResult) {
 
                                 //var trinketUserPossibleMatchArray = userResult.possible_matches;
                                 var currentUser = userResult,
@@ -116,7 +116,6 @@ module.exports = {
                                                             userWhoLikedYourTrinket: trinketOwnerId,
                                                             yourTrinketTheyLiked: trinketTrinketOwnerLiked,
                                                             theirTrinketYouLiked: referencedTrinketId
-
                                                         }
                                                     }
                                                 }, {new: true}, function(err, result) {
@@ -145,20 +144,19 @@ module.exports = {
                                                                     userWhoLikedYourTrinket: currentUserId,
                                                                     yourTrinketTheyLiked: referencedTrinketId,
                                                                     theirTrinketYouLiked: trinketTrinketOwnerLiked
-
-
                                                                 }
                                                             }
                                                         }, function(err, finalResult) {
                                                             if (err) res.status(500).json(err);
                                                             //console.log('FINAL RESULT FINAL MATCHES:', finalResult.final_matches);
-                                                            res.end();
+                                                            res.end(finalResult);
+
                                                             // else return res.status(200).json(finalResult);
 
                                                             User.findByIdAndUpdate(finalResult._id, {$pull: {possible_matches: { userWhoLikedYourTrinket: currentUser._id }}}, function(err, result) {
                                                                 if (err) res.json(err);
 
-                                                                console.log('deleted possible match from current user');
+                                                                console.log('deleted possible match from other user');
                                                             });
                                                         });
 
@@ -193,14 +191,21 @@ module.exports = {
     },
 
     get: function(req, res) {
-        Trinkets
-            .find(function(err, result) {
-                if (err) res.status(500).json(err);
-                else res.json(result);
+        User.findById(req.user._id, function(err, user) {
+            if (err) res.json(err);
+
+            var userLikes = user.user_likes;
+
+            Trinkets
+                .find({_id: {$nin: userLikes}}, function(err, result) {
+                    if (err) res.status(500).json(err);
+                    else res.json(result);
 
 
+                })
 
-            })
+        });
+
     },
 
     update: function(req, res) {

@@ -23,14 +23,16 @@ app.service('MainService', function($http, CONSTANT, $q) {
             description: description,
         };
         //console.log('server created userID', userId);
-
+        var dfd = $q.defer();
         $http.post(trinketUrl, trinketData)
             .success(function(data) {
-                console.log('Trinket successfully created');
+                //console.log('Trinket successfully created', data);
+                dfd.resolve(data);
             })
             .error(function(data) {
-                console.log('Error', data);
-            })
+                console.error('Error creating trinket', data);
+            });
+        return dfd.promise;
     };
 
 
@@ -48,7 +50,7 @@ app.service('MainService', function($http, CONSTANT, $q) {
                 dfd.resolve(data);
             })
             .error(function(data) {
-                console.log('Error', data);
+                console.error('Error', data);
             });
         return dfd.promise;
     };
@@ -64,7 +66,7 @@ app.service('MainService', function($http, CONSTANT, $q) {
                 dfd.resolve(data);
             })
             .error(function(data) {
-                console.log('Error', data);
+                console.error('Error', data);
             });
         return dfd.promise;
     };
@@ -83,30 +85,14 @@ app.service('MainService', function($http, CONSTANT, $q) {
         $http.post(trincketIdUrl)
             .success(function(data) {
                 //console.log('data from like in service', data._id);
-                console.log('Successfully liked the trinket');
-                dfd.resolve(data._id);
+                //console.log('Successfully liked the trinket');
+                console.log('service match data', data);
+                dfd.resolve(data);
             })
             .error(function(data) {
-                console.log('Failed to like the trinket', data);
-            });
-        return dfd.promise;
-    };
+                console.error('Failed to like the trinket', data);
 
-    /*
-     * Send trinket ID to assign user ID to dislikes object
-     */
-    this.sendAHate = function(trinketId) {
-        var trincketIdUrl = trinketUrl + '/hate/' + trinketId;
-
-        var dfd = $q.defer();
-        $http.post(trincketIdUrl)
-            .success(function(data) {
-                console.log('data from hate in service', data._id);
-                console.log('Successfully hated the trinket');
-                dfd.resolve(data._id);
-            })
-            .error(function(data) {
-                console.log('Failed to hate the trinket', data);
+                dfd.reject(data)
             });
         return dfd.promise;
     };
@@ -124,30 +110,14 @@ app.service('MainService', function($http, CONSTANT, $q) {
         var dfd = $q.defer();
         $http.delete(trincketIdUrl)
             .success(function(data) {
-                console.log('Successfully deleted trinket');
+                //console.log('Successfully deleted trinket');
                 dfd.resolve(data);
             })
             .error(function(data) {
-                console.log('Error', data);
+                console.error('Error', data);
             });
         return dfd.promise;
     };
-
-    //this.dislikeTrinket = function(trinketId, userId) {
-    //    var userIdUrl = userUrl + '/dislikes/' + userId;
-    //
-    //    var dfd = $q.defer();
-    //    $http.put(userIdUrl, {trinketId: trinketId})
-    //        .success(function(data) {
-    //            console.log('Successfully disliked');
-    //            dfd.resolve(data);
-    //        })
-    //        .error(function(data) {
-    //            console.log('Error', data);
-    //        });
-    //    return dfd.promise;
-    //
-    //};
 
     /*
      * Delete match from array of matches
@@ -158,11 +128,11 @@ app.service('MainService', function($http, CONSTANT, $q) {
         var dfd = $q.defer();
         $http.put(matchIdUrl)
             .success(function(data) {
-                console.log('Successfully deleted match');
+                //console.log('Successfully deleted match');
                 dfd.resolve(data);
             })
             .error(function(data) {
-                console.log('Error deleting match', data);
+                console.error('Error deleting match', data);
             });
         return dfd.promise;
     }
