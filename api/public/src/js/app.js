@@ -5,13 +5,13 @@ app.config(function($stateProvider, $urlRouterProvider) {
     $stateProvider
         .state('login', {
             url: '/login',
-            templateUrl: 'src/templates/loginHome.html',
+            templateUrl: './src/templates/loginHome.html',
             controller: 'loginControl'
         })
         .state('dashboard', {
             abstract: true,
             url: '/dashboard/:id',
-            templateUrl: 'src/templates/dashboard.html',
+            templateUrl: './src/templates/dashboard.html',
             controller: 'dashControl',
             resolve: {
                 getUser: function(MainService, $stateParams) {
@@ -21,7 +21,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
         })
         .state('dashboard.all-items', {
             url: '/trinkets',
-            templateUrl: 'src/templates/allTrinkets.html',
+            templateUrl: '/src/templates/allTrinkets.html',
             controller: 'dashControl'
         })
         .state('dashboard.my-items', {
