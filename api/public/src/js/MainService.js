@@ -3,10 +3,9 @@ var app = angular.module('trinkApp');
 app.service('MainService', function($http, CONSTANT, $q) {
 
     // Globals
-    var url = CONSTANT.url,
-        trinketUrl = url + 'api/trinkets',
-        userUrl = url + 'api/users',
-        currentUserUrl = url + 'auth/me';
+    var trinketUrl = '/api/trinkets',
+        userUrl = '/api/users',
+        currentUserUrl = '/auth/me';
 
 
     ///////////////////////////////////////////

@@ -12,7 +12,7 @@ var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 
 // Config
 var port = process.env.PORT || 3000;
-var mongoUri = 'mongodb://localhost/trinkiter';
+var mongoUri = 'mongodb://localhost:27017/trinkiter';
 
 
 

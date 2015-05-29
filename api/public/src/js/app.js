@@ -1,10 +1,5 @@
 var app = angular.module('trinkApp', ['ui.router', 'ngAnimate']);
 
-app.constant('CONSTANT', {
-    // API server
-    url: 'http://localhost:3000/'
-});
-
 app.config(function($stateProvider, $urlRouterProvider) {
 
     $stateProvider
