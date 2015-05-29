@@ -1,0 +1,24 @@
+{
+  "name": "trinkiterApi",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "author": "Michael Memory",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^0.8.3",
+    "body-parser": "^1.12.4",
+    "cors": "^2.6.0",
+    "express": "^4.12.3",
+    "express-session": "^1.11.2",
+    "mongoose": "^4.0.3",
+    "passport": "^0.2.1",
+    "passport-google": "^0.3.0",
+    "passport-google-oauth": "^0.2.0",
+    "passport-local": "^1.0.0"
+  }
+}
