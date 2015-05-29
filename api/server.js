@@ -49,9 +49,9 @@ passport.deserializeUser(function(obj, done) {
 
 // Authentication
 passport.use(new GoogleStrategy({
-        clientID: configAuth.googleAuth.clientID,
-        clientSecret: configAuth.googleAuth.clientSecret,
-        callbackURL: "http://localhost:3000/auth/google/callback"
+        clientID: process.env.GOOGLE_CLIENTID_TRINKITER || configAuth.googleAuth.clientID,
+        clientSecret: process.env.GOOGLE_CLIENTSECRET_TRINKITER || configAuth.googleAuth.clientSecret,
+        callbackURL: process.env.GOOGLE_CALLBACKURL_TRINKITER || "http://localhost:3000/auth/google/callback"
     },
     function(token, refreshToken, profile, done) {
         //console.log('profile', profile);
