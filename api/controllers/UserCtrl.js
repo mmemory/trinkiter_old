@@ -59,16 +59,6 @@ module.exports = {
             });
     },
 
-
-
-    // TODO make it so the user moves reference of block to dislikes
-    //updateDislikes: function(req, res) {
-    //    Users.findByIdAndUpdate(req.params.id, {$push: {}}, function(err, result) {
-    //        if (err) res.status(500).json(err);
-    //        else res.json(result.trinket_info.user_dislikes.push(req.body.trinketId));
-    //    })
-    //},
-
     update: function(req, res) {
         Users.findByIdAndUpdate(req.params.id, req.body, function(err, result) {
             if (err) res.status(500).json(err);
@@ -88,17 +78,7 @@ module.exports = {
             if (err) res.status(500).json(err);
             else res.json(result);
 
-            //var otherUserMatchArray = req.params.otherUserId.final_matches;
-            //
-            //for (var i = 0; i < otherUserMatchArray.length; i++) {
-            //
-            //}
-            //
-            //Users.findByIdAndUpdate(req.params.otherUserId, {$pull: {final_matches: {_id:}}} , function(err, userResult) {
-            //
-            //});
-
-            console.log('DELETED MATCH ON SERVER TOO');
+            //console.log('DELETED MATCH ON SERVER TOO');
         })
     }
 };

@@ -27,7 +27,8 @@
     }
 
     &:hover, a:hover {
-      color: $component-color;
+      color: lighten($component-color, 30%);
+      transition: .2s;
     }
   }
 

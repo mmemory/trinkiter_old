@@ -382,48 +382,49 @@ a:hover {
 }
 /* line 29, ../../src/styles/partials/_dashboardNav.scss */
 .nav-dashboard p:hover, .nav-dashboard p a:hover {
-  color: #0b94d3;
+  color: #7fd2f8;
+  transition: .2s;
 }
-/* line 34, ../../src/styles/partials/_dashboardNav.scss */
+/* line 35, ../../src/styles/partials/_dashboardNav.scss */
 .nav-dashboard .icon-plus {
   margin: 0 0 0 20px;
   color: #ffffff;
 }
-/* line 38, ../../src/styles/partials/_dashboardNav.scss */
+/* line 39, ../../src/styles/partials/_dashboardNav.scss */
 .nav-dashboard .icon-plus:after {
   content: 'new item';
   position: relative;
   left: 5px;
   bottom: 1px;
 }
-/* line 46, ../../src/styles/partials/_dashboardNav.scss */
+/* line 47, ../../src/styles/partials/_dashboardNav.scss */
 .nav-dashboard .icon-logout {
   color: #ffffff;
   margin: 0 0 0 20px;
 }
-/* line 50, ../../src/styles/partials/_dashboardNav.scss */
+/* line 51, ../../src/styles/partials/_dashboardNav.scss */
 .nav-dashboard .icon-logout:after {
   content: 'logout';
   position: relative;
   left: 5px;
 }
-/* line 57, ../../src/styles/partials/_dashboardNav.scss */
+/* line 58, ../../src/styles/partials/_dashboardNav.scss */
 .nav-dashboard .icon-myDash {
   color: #ffffff;
   margin: 0 0 0 20px;
 }
-/* line 61, ../../src/styles/partials/_dashboardNav.scss */
+/* line 62, ../../src/styles/partials/_dashboardNav.scss */
 .nav-dashboard .icon-myDash:after {
   content: 'my trinkets';
   position: relative;
   left: 5px;
 }
-/* line 68, ../../src/styles/partials/_dashboardNav.scss */
+/* line 69, ../../src/styles/partials/_dashboardNav.scss */
 .nav-dashboard .icon-everythingDash {
   color: #ffffff;
   margin: 0 0 0 20px;
 }
-/* line 72, ../../src/styles/partials/_dashboardNav.scss */
+/* line 73, ../../src/styles/partials/_dashboardNav.scss */
 .nav-dashboard .icon-everythingDash:after {
   content: 'dashboard';
   position: relative;
