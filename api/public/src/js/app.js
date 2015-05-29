@@ -21,12 +21,12 @@ app.config(function($stateProvider, $urlRouterProvider) {
         })
         .state('dashboard.all-items', {
             url: '/trinkets',
-            templateUrl: '/src/templates/allTrinkets.html',
+            templateUrl: './src/templates/allTrinkets.html',
             controller: 'dashControl'
         })
         .state('dashboard.my-items', {
             url: '/mytrinkets',
-            templateUrl: 'src/templates/userTrinkets.html',
+            templateUrl: './src/templates/userTrinkets.html',
             controller: 'dashControl'
         });
 
