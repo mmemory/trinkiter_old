@@ -15,6 +15,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
             controller: 'dashControl',
             resolve: {
                 getUser: function(MainService, $stateParams) {
+                    console.log('got to resolve in app.js');
                     return MainService.getCurrentUser($stateParams.id);
                 }
             }
