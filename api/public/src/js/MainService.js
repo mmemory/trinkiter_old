@@ -61,7 +61,7 @@ app.service('MainService', function($http, CONSTANT, $q) {
         var dfd = $q.defer();
         $http.get(currentUserUrl)
             .success(function(data) {
-                //console.log('user data from service', data);
+                console.log('user data from service', data);
                 dfd.resolve(data);
             })
             .error(function(data) {
